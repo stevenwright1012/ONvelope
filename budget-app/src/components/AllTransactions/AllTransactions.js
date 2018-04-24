@@ -9,8 +9,10 @@ class AllTransactions extends Component{
         return(
             <div className='main'>
                 <Nav />
-                <Balance />
-                <h1>AllTransactions</h1>
+                <div>
+                    <h1>AllTransactions</h1>
+                    <Balance />
+                </div>
             </div>
         )
     }

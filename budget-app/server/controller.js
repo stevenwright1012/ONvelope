@@ -1,9 +1,9 @@
 module.exports = {
-    // createUser: (req, res, next) => {
-    //     const db = app.get('db');
-    //     const {nickname, id} = profile;
-    //     db.create_user([nickname, id]).then( createdUser => {
-    //         return done(null, createdUser[0].id)
-    //     })
-    // },
+    allTrans: (req, res) =>{
+        const db = req.app.get('db');
+
+        db.get_all_trans([req.params.id]).then(trans => {
+            res.status(200).send(trans);
+        })
+    }
 }

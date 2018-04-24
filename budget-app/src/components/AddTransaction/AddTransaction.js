@@ -7,9 +7,10 @@ class AddTransaction extends Component{
         return(
             <div className='main'>
                 <Nav />
-                <h1>AddTransaction
-                
-                </h1>
+                <h1>AddTransaction</h1>
+                <div>
+                    
+                </div>
             </div>
         )
     }
