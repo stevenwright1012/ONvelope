@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
-class Login extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Login</h1>
-                <h2>{this.props.login}</h2>
-            </div>
-        )
-    }
+export default  function Login(){
+    return (
+        <div>
+            <h1>Welcome to ONvelope!</h1>
+            <h2>The best way to get ON top of you finances</h2>
+            <h3>To get started, click  
+                <a href='http://localhost:3005/auth'>
+                    <button>LOGIN</button>
+                </a>
+            </h3>
+        </div>
+    )
 }
-function mapStateToProps(state){
-    return{
-        login: state.login
-    }
-}
-export default connect(mapStateToProps)(Login);
