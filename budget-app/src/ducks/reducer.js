@@ -1,9 +1,7 @@
 const initailState = {
-    login: 'This is state'
+    user:{}
 }
 
-function reducer(state = initailState, action){
+export default function reducer(state = initailState, action){
     return state;
 }
-
-export default reducer

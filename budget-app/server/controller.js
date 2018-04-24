@@ -1,10 +1,9 @@
 module.exports = {
-    butt: (req, res) => {
-        const db = req.app.get('db')
-        console.log('ive been hit');
-        
-        db.get_butts().then(result => {
-            res.status(200).send(result)
-        })
-    }
+    // createUser: (req, res, next) => {
+    //     const db = app.get('db');
+    //     const {nickname, id} = profile;
+    //     db.create_user([nickname, id]).then( createdUser => {
+    //         return done(null, createdUser[0].id)
+    //     })
+    // },
 }

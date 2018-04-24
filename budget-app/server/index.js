@@ -28,15 +28,34 @@ passport.use(new Auth0Strategy({
     clientSecret: CLIENT_SECRET,
     callbackURL: CALLBACK_URL,
     scope: 'openid profile'
-},  function(accessToken, refreshToken, extraParams, profile, done){
-    return done(null, profile)
+},  function(accessToken, refreshToken, extraParams, profile, done){   
+    console.log(profile);
+    
+    const db = app.get('db');
+    const {nickname, id} = profile;
+    db.find_user([id]).then( user => {
+        if (user[0]){
+            console.log(user);
+            
+            return done(null, user[0].user_id)
+        }
+        else{
+            db.create_user([nickname, id]).then( createdUser => {
+                console.log(createdUser);
+                
+                return done(null, createdUser[0].user_id)
+            })
+        }
+    })
 }))
 
-passport.serializeUser((profile, done) => {
-    return done(null, profile)
+passport.serializeUser((id, done) => {
+    return done(null, id)
 })
-passport.deserializeUser((profile, done) => {
-    return done(null, profile)
+passport.deserializeUser( (id, done) => {
+    app.get('db').find_session_user([id]).then( user => {
+        done(null, user[0])
+    })
 })
 
 app.get('/auth', passport.authenticate('auth0'))
