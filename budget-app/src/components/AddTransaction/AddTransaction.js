@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Nav from '../Nav/Nav'
 import {connect} from 'react-redux';
-import axios from 'axios';
+import {addTrans} from '../../ducks/reducer';
 
 class AddTransaction extends Component{
     constructor(){
@@ -47,24 +47,19 @@ class AddTransaction extends Component{
         })
     }
     submitTransaction(){
-        const { payee, amount, envelope, status, note} = this.state
+        const { payee, amount, envelope, status, note} = this.state;
+        const {user_id} = this.props.user;
 
-        axios.post('/api/addtrans', {
-            user_id: this.props.user.user_id,
-            payee: payee,
-            amount: (amount * -1),
-            envelope: envelope,
-            status: status,
-            note: note
-        }).then(res => {
-            this.props.history.push('/transactions')
-        })
+        console.log(user_id);
+        
+        this.props.addTrans(user_id, payee, amount, envelope, status, note)
+        this.props.history.push('/transactions')
     }
     render(){
         var userEnvelopes = null;
         if(this.props.envelopes){
-            userEnvelopes = this.props.envelopes.map(enve => {
-                return <option value={enve.name}>{enve.name}</option>
+            userEnvelopes = this.props.envelopes.map((enve, i) => {
+                return <option key={i} value={enve.name}>{enve.name}</option>
             })
         }
         return(
@@ -93,7 +88,9 @@ class AddTransaction extends Component{
                     <textarea cols="20" rows="3" placeholder='Write a short note here if you want' onChange={(e) => this.handleNote(e.target.value)}>
                     </textarea>
                     <br/>
-                    <button onClick={() => this.submitTransaction()}>Submit</button>         
+                    <button 
+                    onClick={() => this.submitTransaction()}>
+                    Submit</button>         
                 </div>
             </div>
         )
@@ -107,4 +104,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(AddTransaction);
+export default connect(mapStateToProps, {addTrans})(AddTransaction);

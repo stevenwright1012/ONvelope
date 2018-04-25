@@ -10,7 +10,8 @@ const con = require('./controller');
 const {CONNECTION_URI, SESSION_SECRET, DOMAIN, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL} = process.env
 
 massive(CONNECTION_URI).then(db => {
-    app.set('db', db)    
+    app.set('db', db)
+    
 })
 
 const app = express();

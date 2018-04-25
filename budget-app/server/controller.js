@@ -16,8 +16,9 @@ module.exports = {
     },
     deleteTrans: (req, res) => {
         const db = req.app.get('db');
+        console.log(req.user);
         
-        db.delete_trans([req.params.id]).then(trans => {
+        db.delete_trans([req.params.id, req.user.user_id]).then(trans => {
             res.status(200).send(trans)
         }).catch(console.log)
     },
@@ -34,6 +35,6 @@ module.exports = {
         
         db.add_envelope([user_id, name, type]).then(envelopes => {
             res.status(200).send(envelopes);            
-        }).catch(console.log) 
+        }).catch(console.log)
     }
 }

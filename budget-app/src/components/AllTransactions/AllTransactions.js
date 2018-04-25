@@ -7,15 +7,117 @@ import {connect} from 'react-redux';
 
 
 class AllTransactions extends Component{
-    componentDidMount(){
-        this.props.getTransactions(this.props.user.user_id)
+    constructor(){
+        super()
+
+        this.state ={
+            filteredList:[]
+        }
+    
     }
-    componentDidUpdate(){
-        this.props.getTransactions(this.props.user.user_id)
-        
+    componentDidMount(){
+        this.props.getTransactions(this.props.user.user_id);
+        this.setState({
+            filteredList: this.props.transactions,
+        })
+    }
+    componentWillReceiveProps(next){
+        if(this.state.filteredList.length !== next.transactions.length){
+            this.setState({
+                filteredList: next.transactions
+            })
+        }
+    }
+
+    updateFilteredList(str){
+        let newList=[];
+        switch (str) {
+            case "DEPOSITS":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount > 0){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "PAID":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount < 0){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "PENDING_DEPOSITS":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount > 0 && tran.status === false){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "PENDING_PAYMENTS":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount < 0 && tran.status === false){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "CLEARED_DEPOSITS":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount > 0 && tran.status === true){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "CLEARED_PAID":
+                newList = this.props.transactions.filter(tran =>{
+                    if(tran.amount < 0 && tran.status === true){
+                        return tran
+                    }else{
+                        return null
+                    }
+                })
+                this.setState({
+                    filteredList: newList
+                })
+                break;
+            case "ALL":
+                this.setState({
+                    filteredList: this.props.transactions
+                })
+                break;
+            default:
+                this.setState({
+                    filteredList: this.props.transactions
+                })
+                break;
+        }
     }
     render(){
-        var cards = this.props.transactions.map((tran, i) => {
+        var cards = this.state.filteredList.map((tran, i) => {
             return (
                 <TransactionCard key={i}
                 id={tran.id}
@@ -30,8 +132,15 @@ class AllTransactions extends Component{
             <div className='main'>
                 <Nav />
                 <div>
-                    <h1>AllTransactions</h1>
+                    <h1>All Transactions</h1>
                     <Balance />
+                    <button onClick={() => this.updateFilteredList('ALL')}>All</button>                    
+                    <button onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
+                    <button onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
+                    <button onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>                    
+                    <button onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
+                    <button onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
+                    <button onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>                    
                     {cards}
                 </div>
             </div>
