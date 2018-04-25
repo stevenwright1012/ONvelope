@@ -6,30 +6,30 @@ export default  function Nav(){
     return (
         <div className="nav_bar">
             <Link to='/dashboard'>
-                <div className='logo'>
+                <div className='nav_button' id='logo'>
                     <img src="http://www.iconarchive.com/download/i95978/iconsmind/outline/Envelope.ico" alt=""/>
                 </div>
             </Link>
             <Link to='/deposit'>
-                <button className='deposit'>Deposit</button>
+                <button className='nav_button' id='deposit'>Deposit</button>
             </Link>
             <Link to='/trans'>
-                <button>Trans</button>
+                <button className='nav_button'>Trans</button>
             </Link>
             <Link to='/payday'>
-                <button>Payday</button>
+                <button className='nav_button'>Payday</button>
             </Link>
             <Link to='/transactions'>
-                <button>AllTrans</button>
+                <button className='nav_button'>AllTrans</button>
             </Link>
             <Link to='/plan'>
-                <button>Plan</button>
+                <button className='nav_button'>Plan</button>
             </Link>
             <Link to='/dashboard'>
-                <button>Move</button>
+                <button className='nav_button'>Move</button>
             </Link>
             <Link to='/'>
-                <button className='logout'>Logout</button>
+                <button className='nav_button' id='logout'>Logout</button>
             </Link>
         </div>
     )

@@ -3,4 +3,7 @@
 }
 .main{
   display: flex;
+  position: absolute;
+  left: 20vw;
+  /* width: 100%; */
 }

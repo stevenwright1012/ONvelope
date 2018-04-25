@@ -72,4 +72,8 @@ app.get('/auth/me', (req, res) => {
 //////transactions endpoints/////
 app.get('/api/trans/:id', con.allTrans)
 
+/////envelope endpoints/////
+app.get('/api/envelopes/:id', con.allEnvelopes)
+app.post('/api/addenvelope', con.addEnvelope)
+
 app.listen(3005, () => console.log("listening on 3005"));

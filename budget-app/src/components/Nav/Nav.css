@@ -1,13 +1,13 @@
 .nav_bar{
     width: 20vw;
     height: 100vh;
-    /* position: fixed; */
+    position: fixed;
     left: 0px;
     display: block;
     background: gainsboro;
     box-sizing: border-box;
 }
-.logo{
+#logo{
     background: rgb(99, 224, 255);
     box-sizing: border-box;
     padding: 2px;
@@ -16,10 +16,7 @@ img{
     width: 100%;
     box-sizing: border-box;
 }
-.deposit{
-    margin-top: 5vh;
-}
-button{
+.nav_button{
     margin-bottom: 5vh;
     width: 100%;
 }
