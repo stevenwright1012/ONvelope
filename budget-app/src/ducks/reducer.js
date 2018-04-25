@@ -36,7 +36,7 @@ export function getUser(){
 
 export function getTransactions(id){
     let trans = axios.get(`/api/trans/${id}`).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         return res.data
     })
     return{

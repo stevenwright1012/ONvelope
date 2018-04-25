@@ -1,3 +1,9 @@
 .tran_card{
     border: solid black 2px;
 }
+#pos{
+    background: rgb(106, 204, 106)
+}
+#neg{
+    background: rgb(238, 117, 117)
+}

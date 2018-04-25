@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import Balance from '../Balance/Balance';
 import TransactionCard from '../TransactionCard/TransactionCard';
+import {getTransactions} from '../../ducks/reducer'
 import {connect} from 'react-redux';
 
 
 class AllTransactions extends Component{
-
+    componentDidMount(){
+        this.props.getTransactions(this.props.user.user_id)
+    }
+    componentDidUpdate(){
+        this.props.getTransactions(this.props.user.user_id)
+        
+    }
     render(){
         var cards = this.props.transactions.map((tran, i) => {
             return (
@@ -34,8 +41,9 @@ class AllTransactions extends Component{
 
 function mapStateToProps(state){
     return{
+        user: state.user,
         transactions: state.transactions,
     }
 }
 
-export default connect(mapStateToProps)(AllTransactions);
+export default connect(mapStateToProps, {getTransactions})(AllTransactions);
