@@ -14,7 +14,7 @@ export default  function Nav(){
                 <button className='nav_button' id='deposit'>Deposit</button>
             </Link>
             <Link to='/trans'>
-                <button className='nav_button'>Trans</button>
+                <button className='nav_button'>addTrans</button>
             </Link>
             <Link to='/payday'>
                 <button className='nav_button'>Payday</button>

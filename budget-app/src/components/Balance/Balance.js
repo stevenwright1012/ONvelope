@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import './Balance.css';
 import {connect} from 'react-redux';
+import {getUser} from '../../ducks/reducer'
 
 class Balance extends Component{
-
+    // componentDidMount(){
+    //     this.props.getUser()
+    // }
     render(){
         const{transactions} = this.props
         var pending = 0;
@@ -30,4 +33,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(Balance);
+export default connect(mapStateToProps, {getUser})(Balance);

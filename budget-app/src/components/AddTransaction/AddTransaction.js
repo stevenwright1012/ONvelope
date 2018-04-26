@@ -49,10 +49,12 @@ class AddTransaction extends Component{
     submitTransaction(){
         const { payee, amount, envelope, status, note} = this.state;
         const {user_id} = this.props.user;
-
-        console.log(user_id);
+        var newTotal = this.props.user.total
+        if(status){
+            newTotal -= amount
+        }
         
-        this.props.addTrans(user_id, payee, amount, envelope, status, note)
+        this.props.addTrans(user_id, payee, amount, envelope, status, note, newTotal)
         this.props.history.push('/transactions')
     }
     render(){

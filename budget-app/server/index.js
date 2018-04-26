@@ -73,7 +73,7 @@ app.get('/auth/me', (req, res) => {
 //////transactions endpoints/////
 app.get('/api/trans/:id', con.allTrans)
 app.post('/api/addtrans', con.addTrans)
-app.delete('/api/trans/:id', con.deleteTrans)
+app.put('/api/delete', con.deleteTrans)
 
 /////envelope endpoints/////
 app.get('/api/envelopes/:id', con.allEnvelopes)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import router from './router';
+import {withRouter} from 'react-router-dom'
 // import {Link} from 'react-router-dom';
 
 class App extends Component {
@@ -13,4 +14,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

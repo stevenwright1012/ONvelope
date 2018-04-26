@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import Balance from '../Balance/Balance';
 import TransactionCard from '../TransactionCard/TransactionCard';
-import {getTransactions} from '../../ducks/reducer'
+import {getTransactions, getUser} from '../../ducks/reducer'
 import {connect} from 'react-redux';
 
 
@@ -17,11 +17,14 @@ class AllTransactions extends Component{
     }
     componentDidMount(){
         this.props.getTransactions(this.props.user.user_id);
+        // this.getUser()
         this.setState({
             filteredList: this.props.transactions,
         })
     }
     componentWillReceiveProps(next){
+        console.log(next);
+        
         if(this.state.filteredList.length !== next.transactions.length){
             this.setState({
                 filteredList: next.transactions
@@ -155,4 +158,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getTransactions})(AllTransactions);
+export default connect(mapStateToProps, {getTransactions, getUser})(AllTransactions);

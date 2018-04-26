@@ -13,6 +13,7 @@ const DELETE_TRANS = 'DELETE_TRANS';
 const ADD_TRAN = "ADD_TRAN"
 
 export default function reducer(state = initailState, action){
+    
     switch (action.type) {
         case GET_USER_INFO + '_FULFILLED':
             return Object.assign({}, state, {user: action.payload})
@@ -21,11 +22,9 @@ export default function reducer(state = initailState, action){
         case GET_ALL_ENVELOPES + '_FULFILLED':
             return Object.assign({}, state, {envelopes: action.payload})
         case DELETE_TRANS + '_FULFILLED':
-        console.log(action.payload);
-        
-            return Object.assign({}, state, {transactions: action.payload})
+            return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0]})
         case ADD_TRAN + "_FULFILLED":
-            return Object.assign({}, state, {transactions: action.payload})            
+            return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0]}) 
         default:
             return state;
     }
@@ -33,7 +32,6 @@ export default function reducer(state = initailState, action){
 
 export function getUser(){
     let userData = axios.get('/auth/me').then( res => {
-        
         return res.data
     })
     return{
@@ -64,28 +62,32 @@ export function getEnvelopes(id){
     }
 }
 
-export function addTrans(user_id, payee, amount, envelope, status, note){
-    let trans = axios.post('/api/addtrans', {
+export function addTrans(user_id, payee, amount, envelope, status, note, total){
+    let values = axios.post('/api/addtrans', {
         user_id: user_id,
         payee: payee,
         amount: (amount * -1),
         envelope: envelope,
         status: status,
-        note: note
+        note: note,
+        total: total
     }).then(res => {
         return res.data
     })
     return{
         type: ADD_TRAN,
-        payload: trans
+        payload: values
     }
 }
-export function deleteTrans(id){
-    let trans = axios.delete(`/api/trans/${id}`).then(res => {
+export function deleteTrans(id, total){
+    let values = axios.put('/api/delete', {
+        id: id,
+        total: total
+    }).then(res => {
         return res.data
     })
     return{
         type: DELETE_TRANS,
-        payload: trans
+        payload: values
     }
 }
