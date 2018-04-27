@@ -1,5 +1,5 @@
 UPDATE users
-SET total = $1
+SET total = total + $1
 WHERE user_id = $2;
 
 SELECT * FROM users

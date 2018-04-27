@@ -75,9 +75,6 @@ app.get('/api/trans/:id', con.allTrans)
 app.post('/api/addtrans', con.addTrans)
 app.put('/api/delete', con.deleteTrans)
 
-/////Deposit endpoints///////
-app.post('/api/adddepo', con.addDepo)
-
 /////envelope endpoints/////
 app.get('/api/envelopes/:id', con.allEnvelopes)
 app.post('/api/addenvelope', con.addEnvelope)

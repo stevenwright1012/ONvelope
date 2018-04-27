@@ -51,13 +51,9 @@ class AddTransaction extends Component{
         if(!envelope){
             return alert("please select an envelope")
         }
-        const {user_id} = this.props.user;
-        var newTotal = this.props.user.total
-        if(status){
-            newTotal -= amount
-        }
-        
-        this.props.addTrans(user_id, payee, amount, envelope, status, note, newTotal)
+
+
+        this.props.addTrans(payee, amount, envelope, status, note)
         this.props.history.push('/transactions')
     }
     render(){

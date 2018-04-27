@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import EnvelopeRow from '../EnvelopeRow/EnvelopeRow'
-import {addDepo} from '../../ducks/reducer'
+import {addTrans} from '../../ducks/reducer'
 
 class AddDeposit extends Component{
     constructor(){
@@ -11,6 +11,7 @@ class AddDeposit extends Component{
         this.state ={
             amount: 0,
             payer: "",
+            status: false,
             depoEnvelopes: []
         }
     this.calulateTotal = this.calulateTotal.bind(this)
@@ -25,6 +26,16 @@ class AddDeposit extends Component{
             payer: e
         })
     }
+    handleStatusTrue(){
+        this.setState({
+            status: true
+        })
+    }
+    handleStatusFalse(){
+        this.setState({
+            status:false
+        })
+    }
     calulateTotal(obj){
         var filtArr = this.state.depoEnvelopes.filter( env => env.id !== obj.id);
         var newArr = [...filtArr, obj];
@@ -36,9 +47,10 @@ class AddDeposit extends Component{
         for(let i=0; i< this.state.depoEnvelopes.length; i++){
             let obj = this.state.depoEnvelopes[i]
             if(obj.depAmount){
-                this.props.addDepo(obj.id, obj.depAmount, this.state.payer)
+                this.props.addTrans(this.state.payer, (obj.depAmount*-1), obj.id, this.state.status, null)
             }
         }
+        this.props.history.push('/transactions')
     }
     render(){
         console.log(this.state.depoEnvelopes);
@@ -70,6 +82,15 @@ class AddDeposit extends Component{
                     <input type="number" placeholder='How Much?' onChange={(e) => this.handleAmount(+e.target.value)}/>
                     <input type="text" placeholder='From Who?' onChange={(e) => this.handlePayer(e.target.value)}/>
                     <br/>
+                    <label>
+                        <input type="radio" name='status' onClick={() => this.handleStatusTrue()}/>
+                        Cleared
+                    </label>
+                    <label>
+                        <input type="radio" name='status' onClick={() => this.handleStatusFalse()}/>
+                        Pending
+                    </label>
+                    <br/>
                     Unbudgeted:{this.state.amount - subtractor}
                     {enevlopeRows}
                     <br/>
@@ -86,4 +107,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {addDepo})(AddDeposit);
+export default connect(mapStateToProps, {addTrans})(AddDeposit);

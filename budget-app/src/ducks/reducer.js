@@ -11,7 +11,6 @@ const GET_ALL_TRANS = 'GET_ALL_TRANS';
 const GET_ALL_ENVELOPES = 'GET_ALL_ENVELOPES';
 const DELETE_TRANS = 'DELETE_TRANS';
 const ADD_TRAN = "ADD_TRAN";
-const ADD_DEPO = "ADD_DEPO"
 
 export default function reducer(state = initailState, action){
      
@@ -26,9 +25,6 @@ export default function reducer(state = initailState, action){
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
         case ADD_TRAN + "_FULFILLED":
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
-        case ADD_DEPO + "_FULFILLED":
-            console.log(action);
-            break;
         default:
             return state;
     }
@@ -66,15 +62,13 @@ export function getEnvelopes(id){
     }
 }
 
-export function addTrans(user_id, payee, amount, envelope, status, note, total){
+export function addTrans(payee, amount, envelope, status, note){
     let values = axios.post('/api/addtrans', {
-        user_id: user_id,
         payee: payee,
         amount: (amount * -1),
         envelope: envelope,
         status: status,
         note: note,
-        total: total
     }).then(res => {
         return res.data
     })
@@ -83,30 +77,17 @@ export function addTrans(user_id, payee, amount, envelope, status, note, total){
         payload: values
     }
 }
-export function deleteTrans(id, total, amount, envelope){
+export function deleteTrans(id, amount, envelope, status){
     let values = axios.put('/api/delete', {
         id: id,
-        total: total,
         amount: (amount * -1),
-        envelope: envelope
+        envelope: envelope,
+        status: status
     }).then(res => {
         return res.data
     })
     return{
         type: DELETE_TRANS,
-        payload: values
-    }
-}
-export function addDepo(id, amount, payer){
-    let values = axios.post('/api/adddepo', {
-        envelope: id,
-        amount: amount,
-        payer: payer
-    }).then(res => {
-        return res.data
-    })
-    return{
-        type: ADD_DEPO,
         payload: values
     }
 }

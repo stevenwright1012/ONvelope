@@ -1,3 +1,5 @@
+DELETE FROM transactions;
+
 UPDATE users
 SET total = 300
 WHERE user_id = 1;

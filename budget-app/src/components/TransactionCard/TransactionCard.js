@@ -7,11 +7,7 @@ class TransactionCard extends React.Component{
 
     render(){
         const {id, payee, amount, envelope, status, note} = this.props;
-        let newTotal = this.props.user.total
-        if(status){
-            newTotal -= amount
-        }
-        
+
         var pending = '';
         if(status){
             pending = 'Cleared'
@@ -21,10 +17,7 @@ class TransactionCard extends React.Component{
         }
 
         var envelopeName = this.props.envelopes.filter( item => item.id=== +envelope)
-        console.log(envelope);
-        console.log(envelopeName);
-        
-        
+
         return (
             <div className="tran_card">
                 {
@@ -42,7 +35,7 @@ class TransactionCard extends React.Component{
                     <p>
                     note:{note}
                     </p>
-                    <button onClick={() => this.props.deleteTrans(id, newTotal, amount, envelope)}>Delete</button>
+                    <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
                     <button>Edit</button>
                     </div>
                 :
@@ -58,7 +51,7 @@ class TransactionCard extends React.Component{
                     <p>
                     note:{note}
                     </p>
-                    <button onClick={() => this.props.deleteTrans(id, newTotal, amount, envelope)}>Delete</button>
+                    <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
                     <button>Edit</button>
                     </div>
                 }
