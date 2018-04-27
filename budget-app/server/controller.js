@@ -13,24 +13,31 @@ module.exports = {
 
         tempArr.push(db.add_trans([user_id, payee, amount, envelope, status, note]));
         tempArr.push(db.alter_total([total, user_id]));
+        tempArr.push(db.alter_envelope([amount, envelope, user_id]));
 
         Promise.all(tempArr).then(values => {
             res.status(200).send(values);
         }).catch(console.log)
     },
+    addDepo: (req, res) => {
+        const db = req.app.get('db');
+        const { envelope, amount, payer} = req.body
+        
+        db.add_trans(req.user.user_id, payer, amount, envelope, true, null).then(trans => {
+            res.status(200).send(trans)
+        })
+    },
     deleteTrans: (req, res) => {
         const db = req.app.get('db');
-        console.log(req.body);
-        
-        const{id, total} = req.body
+        const{id, total, amount, envelope} = req.body
+        const{user_id} = req.user
         let tempArr=[]
         
-        tempArr.push(db.delete_trans([id, req.user.user_id]))
-        tempArr.push(db.alter_total([total, req.user.user_id]))
+        tempArr.push(db.delete_trans([id, user_id]));
+        tempArr.push(db.alter_total([total, user_id]));
+        tempArr.push(db.alter_envelope([amount, envelope, user_id]));        
 
         Promise.all(tempArr).then(values => {
-            console.log(values);
-            
             res.status(200).send(values);
         }).catch(console.log)
     },

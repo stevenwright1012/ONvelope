@@ -10,7 +10,7 @@ class AddTransaction extends Component{
         this.state= {
             payee: '',
             amount:0,
-            envelope: '',
+            envelope: 0,
             status: false,
             note: '',
 
@@ -48,6 +48,9 @@ class AddTransaction extends Component{
     }
     submitTransaction(){
         const { payee, amount, envelope, status, note} = this.state;
+        if(!envelope){
+            return alert("please select an envelope")
+        }
         const {user_id} = this.props.user;
         var newTotal = this.props.user.total
         if(status){
@@ -61,7 +64,7 @@ class AddTransaction extends Component{
         var userEnvelopes = null;
         if(this.props.envelopes){
             userEnvelopes = this.props.envelopes.map((enve, i) => {
-                return <option key={i} value={enve.name}>{enve.name}</option>
+                return <option key={i} value={enve.id}>{enve.name}</option>
             })
         }
         return(

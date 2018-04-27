@@ -23,8 +23,6 @@ class AllTransactions extends Component{
         })
     }
     componentWillReceiveProps(next){
-        console.log(next);
-        
         if(this.state.filteredList.length !== next.transactions.length){
             this.setState({
                 filteredList: next.transactions

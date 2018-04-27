@@ -19,6 +19,12 @@ class TransactionCard extends React.Component{
         else{
             pending = "Pending"
         }
+
+        var envelopeName = this.props.envelopes.filter( item => item.id=== +envelope)
+        console.log(envelope);
+        console.log(envelopeName);
+        
+        
         return (
             <div className="tran_card">
                 {
@@ -28,7 +34,7 @@ class TransactionCard extends React.Component{
                     payee: {payee}
                     <p>amount:{amount}</p>
                     <p>
-                    envelope:{envelope}
+                    envelope:{envelopeName[0].name}
                     </p>
                     <p>
                     {pending}
@@ -36,7 +42,7 @@ class TransactionCard extends React.Component{
                     <p>
                     note:{note}
                     </p>
-                    <button onClick={() => this.props.deleteTrans(id, newTotal)}>Delete</button>
+                    <button onClick={() => this.props.deleteTrans(id, newTotal, amount, envelope)}>Delete</button>
                     <button>Edit</button>
                     </div>
                 :
@@ -44,7 +50,7 @@ class TransactionCard extends React.Component{
                     payee: {payee}
                     <p>amount:{amount}</p>
                     <p>
-                    envelope:{envelope}
+                    envelope:{envelopeName[0].name}
                     </p>
                     <p>
                     {pending}
@@ -52,7 +58,7 @@ class TransactionCard extends React.Component{
                     <p>
                     note:{note}
                     </p>
-                    <button onClick={() => this.props.deleteTrans(id, newTotal)}>Delete</button>
+                    <button onClick={() => this.props.deleteTrans(id, newTotal, amount, envelope)}>Delete</button>
                     <button>Edit</button>
                     </div>
                 }
@@ -63,7 +69,8 @@ class TransactionCard extends React.Component{
 
 function mapStateToProps(state){
     return{
-        user: state.user
+        user: state.user,
+        envelopes: state.envelopes
     }
 }
 
