@@ -13,9 +13,14 @@ class PaydayEnvelope extends React.Component{
         this.setState({
             budgetedAmount: plannedAmount
         })
-        this.props.totalFn({id:this.props.id, amount: plannedAmount});        
     }
     handleAmount(e){
+        let {id, name, type} = this.props
+        var obj = {id: id,
+                   amount: e,
+                   name: name,
+                   type: type}
+        this.props.totalFn(obj)
         this.setState({
             budgetedAmount: e
         })
@@ -34,8 +39,9 @@ class PaydayEnvelope extends React.Component{
                     New amount:{+amount + this.state.budgetedAmount}
                     <br/>
                     <input type="number" value={this.state.budgetedAmount} 
-                    onBlur={(e) => this.handleAmount(+e.target.value)}
+                    onChange={(e) => this.handleAmount(+e.target.value)}
                     />
+
                 </div>
             </div>
         )

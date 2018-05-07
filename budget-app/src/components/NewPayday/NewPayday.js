@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
-import PaydayEnvelope from '../PaydayEnvelope/PaydayEnvelope'
+import PaydayEnvelope from '../PaydayEnvelope/PaydayEnvelope';
+import {addTrans} from '../../ducks/reducer'
 
 
 class NewPayday extends Component{
@@ -15,8 +16,19 @@ class NewPayday extends Component{
     this.calulateTotal = this.calculateTotal.bind(this);
     }
     componentDidMount(){
+        var arr = this.props.envelopes.map(env => {
+            let {id, name, type} = env
+            var envObj ={
+                id: id,
+                amount: this.props.user.payday[id],
+                name: name,
+                type: type,
+            }
+            return envObj
+        })
         this.setState({
-            amount: +this.props.user.payday.amount
+            amount: +this.props.user.payday.amount,
+            depoEnvelopes: arr
         })
     }
     handleAmount(e){
@@ -26,10 +38,34 @@ class NewPayday extends Component{
     }
     calculateTotal(obj){
         var filtArr = this.state.depoEnvelopes.filter( env => env.id !== obj.id);
+        
         var newArr = [...filtArr, obj];
+        
         this.setState({
             depoEnvelopes: newArr,
         })
+
+    }
+    submitToTrans(){
+        var date = new Date();
+        var month = date.getMonth();
+        var day = date.getDay();
+        var year = date.getFullYear();
+        let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
+            return prev + next.amount
+        },0)
+        if(this.state.amount - subtractor === 0){
+            for(let i=0; i< this.state.depoEnvelopes.length; i++){
+                let obj = this.state.depoEnvelopes[i]
+                if(obj.amount){
+                    this.props.addTrans(`${month}/${day}/${year}`, (obj.amount*-1), obj.id, true, `Paycheck submited ${month}/${day}/${year}`)
+                }
+            }
+            setTimeout(() => {this.props.history.push('/transactions')}, 3000)
+        }
+        else{
+            alert("Every dollar must be assigned to an envelope before you can submit")
+        }
     }
     render(){
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
@@ -60,6 +96,8 @@ class NewPayday extends Component{
                     <br/>
                     Unbudgeted:{this.state.amount - subtractor}
                     {enevlopeRows}
+                    <br/>
+                    <button onClick={() => this.submitToTrans()}>Send To Transactions</button>
                 </div>
             </div>
         )
@@ -73,4 +111,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(NewPayday);
+export default connect(mapStateToProps, {addTrans})(NewPayday);
