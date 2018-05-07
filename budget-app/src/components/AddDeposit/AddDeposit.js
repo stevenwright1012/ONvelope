@@ -53,12 +53,9 @@ class AddDeposit extends Component{
         this.props.history.push('/transactions')
     }
     render(){
-        console.log(this.state.depoEnvelopes);
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
             return prev + next.depAmount
         },0)
-        console.log(subtractor);
-        
         let enevlopeRows = this.props.envelopes.map( (envelope, i) => {
             let {id, name, type, amount} = envelope; 
             return (

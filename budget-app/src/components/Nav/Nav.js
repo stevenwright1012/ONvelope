@@ -16,11 +16,11 @@ export default  function Nav(){
             <Link to='/trans'>
                 <button className='nav_button'>addTrans</button>
             </Link>
-            <Link to='/payday'>
-                <button className='nav_button'>Payday</button>
-            </Link>
             <Link to='/transactions'>
                 <button className='nav_button'>AllTrans</button>
+            </Link>
+            <Link to='/payday'>
+                <button className='nav_button'>Payday</button>
             </Link>
             <Link to='/plan'>
                 <button className='nav_button'>Plan</button>

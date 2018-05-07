@@ -1,7 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
-class EnvelopeRow extends React.Component{
+class PaydayEnvelope extends React.Component{
     constructor(){
         super()
 
@@ -9,16 +8,14 @@ class EnvelopeRow extends React.Component{
             budgetedAmount: 0
         }
     }
+    componentDidMount(){
+        let plannedAmount = +this.props.budgetedAmount
+        this.setState({
+            budgetedAmount: plannedAmount
+        })
+        this.props.totalFn({id:this.props.id, amount: plannedAmount});        
+    }
     handleAmount(e){
-        let {id, name, type, amount} = this.props
-        var envObj ={
-            id: id,
-            depAmount: e,
-            name: name,
-            type: type,
-            oldAmount: amount,
-        }
-        this.props.totalFn(envObj) 
         this.setState({
             budgetedAmount: e
         })
@@ -27,7 +24,7 @@ class EnvelopeRow extends React.Component{
         let {name, type, amount} = this.props
         return (
             <div className="envelope">
-                <h3>EnvelopeRow</h3>
+                <h3>PaydayEnvelope</h3>
                 <div>
                     Name:{name}
                     <br/>
@@ -36,17 +33,14 @@ class EnvelopeRow extends React.Component{
                     <br/>
                     New amount:{+amount + this.state.budgetedAmount}
                     <br/>
-                    <input type="number" onBlur={(e) => this.handleAmount(+e.target.value)}/>
+                    <input type="number" value={this.state.budgetedAmount} 
+                    onBlur={(e) => this.handleAmount(+e.target.value)}
+                    />
                 </div>
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return{
-        envelopes: state.envelopes
-    }
-}
 
-export default connect(mapStateToProps)(EnvelopeRow);
+export default PaydayEnvelope;
