@@ -48,8 +48,8 @@ class NewPayday extends Component{
     }
     submitToTrans(){
         var date = new Date();
-        var month = date.getMonth();
-        var day = date.getDay();
+        var month = date.getMonth() +1;
+        var day = date.getDate();
         var year = date.getFullYear();
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
             return prev + next.amount
