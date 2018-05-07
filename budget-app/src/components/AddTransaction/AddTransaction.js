@@ -67,7 +67,7 @@ class AddTransaction extends Component{
             <div className='main'>
                 <Nav />
                 <div>
-                <h1>AddTransaction</h1>
+                    <h1>AddTransaction</h1>
                     <input type="text" placeholder='Payee' onChange={(e) => this.handlePayee(e.target.value)}/>
                     <br/>
                     <input type="number" placeholder='Amount'onChange={(e) => this.handleAmount(e.target.value)}/>

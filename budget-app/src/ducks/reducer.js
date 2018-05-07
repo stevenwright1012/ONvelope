@@ -11,6 +11,7 @@ const GET_ALL_TRANS = 'GET_ALL_TRANS';
 const GET_ALL_ENVELOPES = 'GET_ALL_ENVELOPES';
 const DELETE_TRANS = 'DELETE_TRANS';
 const ADD_TRAN = "ADD_TRAN";
+const MOVE = "MOVE";
 
 export default function reducer(state = initailState, action){
      
@@ -25,6 +26,8 @@ export default function reducer(state = initailState, action){
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
         case ADD_TRAN + "_FULFILLED":
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
+        case MOVE + "_FULFILLED":
+            return Object.assign({}, state, {envelopes: action.payload})
         default:
             return state;
     }
@@ -89,5 +92,11 @@ export function deleteTrans(id, amount, envelope, status){
     return{
         type: DELETE_TRANS,
         payload: values
+    }
+}
+export function move(envelopes){
+    return{
+        type: MOVE,
+        payload: envelopes
     }
 }

@@ -78,5 +78,6 @@ app.put('/api/delete', con.deleteTrans)
 /////envelope endpoints/////
 app.get('/api/envelopes/:id', con.allEnvelopes)
 app.post('/api/addenvelope', con.addEnvelope)
+app.put('/api/move', con.move)
 
 app.listen(3005, () => console.log("listening on 3005"));

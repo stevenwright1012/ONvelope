@@ -24,7 +24,7 @@ class EnvelopeRow extends React.Component{
         })
     }
     render(){
-        let {id, name, type, amount} = this.props
+        let {name, type, amount} = this.props
         return (
             <div>
                 <h3>EnvelopeRow</h3>

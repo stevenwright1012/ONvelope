@@ -25,7 +25,7 @@ export default  function Nav(){
             <Link to='/plan'>
                 <button className='nav_button'>Plan</button>
             </Link>
-            <Link to='/dashboard'>
+            <Link to='/move'>
                 <button className='nav_button'>Move</button>
             </Link>
             <Link to='/'>

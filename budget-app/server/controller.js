@@ -59,4 +59,14 @@ module.exports = {
             res.status(200).send(envelopes);            
         }).catch(console.log)
     },
+    move: (req, res) => {
+        const db = req.app.get('db');
+        const {fromId, toId, amount} = req.body
+        const{user_id} = req.user
+        
+        
+        db.move([fromId, toId, amount, user_id]).then(envelopes => {
+            res.status(200).send(envelopes);
+        }).catch(console.log)
+    },
 }

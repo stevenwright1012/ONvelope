@@ -5,6 +5,7 @@ import Balance from '../Balance/Balance';
 import {connect} from 'react-redux';
 import {getUser, getTransactions, getEnvelopes} from '../../ducks/reducer';
 import {Link} from 'react-router-dom';
+import EnvelopeCard from '../EnvelopeCard/EnvelopeCard'
 // import axios from 'axios';
 
 class Dashboard extends Component{
@@ -16,14 +17,23 @@ class Dashboard extends Component{
         this.props.getEnvelopes(this.props.user.user_id)
     }
     render(){
+        let list = this.props.envelopes.map((enve, i) => {
+            let {id, name, type, amount} = enve; 
+            return <EnvelopeCard key={i}
+                                 id={id}
+                                 name={name}
+                                 type={type}
+                                 amount={amount}/>
+        })
         return(
             <div className='main'>
                 <Nav />
                 <div>
                     <h1>Dashboard</h1>
                     <Balance />
+                    {list}
                     <Link to='/addenvelope'>
-                        <button>Add Envelope</button>
+                        <button>Add New Envelope</button>
                     </Link>
                 </div>
             </div>
@@ -34,6 +44,7 @@ class Dashboard extends Component{
 function mapStateToProps(state){
     return{
         user: state.user,
+        envelopes: state.envelopes
     }
 }
 
