@@ -80,6 +80,7 @@ app.put('/api/edit', con.editTrans)
 app.get('/api/envelopes/:id', con.allEnvelopes)
 app.post('/api/addenvelope', con.addEnvelope)
 app.put('/api/move', con.move)
+app.delete('/api/envdelete/:id', con.deleteEnv)
 
 //////Payday endpoint//////
 app.put('/api/plan', con.changePlan)

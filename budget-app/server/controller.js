@@ -106,4 +106,13 @@ module.exports = {
             res.status(200).send(values);
         }).catch(console.log)
     },
+    deleteEnv: (req, res) => {
+        const db = req.app.get('db');
+        const {id} = req.params
+        const{user_id} = req.user
+
+        db.delete_envelope([id, user_id]).then(envelopes => {
+            res.status(200).send(envelopes);
+        }).catch(console.log)
+    },
 }

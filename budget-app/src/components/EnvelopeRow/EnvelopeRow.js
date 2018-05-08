@@ -36,7 +36,7 @@ class EnvelopeRow extends React.Component{
                     <br/>
                     New amount:{+amount + this.state.budgetedAmount}
                     <br/>
-                    <input type="number" onBlur={(e) => this.handleAmount(+e.target.value)}/>
+                    <input type="number" onChange={(e) => this.handleAmount(+e.target.value)}/>
                 </div>
             </div>
         )
