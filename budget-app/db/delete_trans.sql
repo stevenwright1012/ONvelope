@@ -1,6 +1,7 @@
 DELETE FROM transactions
-WHERE id = $1;
+WHERE trans_id = $1;
 
-SELECT * FROM transactions
-WHERE user_id = $2
-ORDER BY id DESC;
+SELECT * FROM transactions t
+JOIN envelopes e on e.id = t.envelope
+WHERE t.user_id = $2
+ORDER BY trans_id DESC;

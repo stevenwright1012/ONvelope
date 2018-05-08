@@ -12,7 +12,7 @@ class Balance extends Component{
         var pending = 0;
         for(let i = 0; i < transactions.length; i++){
             if(!transactions[i].status){
-                pending += +transactions[i].amount
+                pending += +transactions[i].trans_amount
             }
         }
         return(

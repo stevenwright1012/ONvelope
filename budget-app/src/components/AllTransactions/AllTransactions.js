@@ -121,9 +121,9 @@ class AllTransactions extends Component{
         var cards = this.state.filteredList.map((tran, i) => {
             return (
                 <TransactionCard key={i}
-                id={tran.id}
+                id={tran.trans_id}
                 payee={tran.payee}
-                amount={tran.amount}
+                amount={tran.trans_amount}
                 envelope={tran.envelope}
                 name={tran.name}
                 note={tran.note}
