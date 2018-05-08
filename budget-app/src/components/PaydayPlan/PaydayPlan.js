@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import EnvelopeCard from '../EnvelopeCard/EnvelopeCard';
-import PaydayForm from '../PaydayForm/PaydayForm'
+import PaydayForm from '../PaydayForm/PaydayForm';
+import {changePlan} from '../../ducks/reducer'
 
 class PaydayPlan extends Component{
     constructor(){
@@ -19,11 +20,11 @@ class PaydayPlan extends Component{
         let plans = this.props.envelopes.map(env => {
             return {
                 id: env.id,
-                plannedAmount: this.props.user.payday[env.id]
+                plannedAmount: this.props.payday[env.id]
             }
         })
         this.setState({
-            typicalPay: this.props.user.payday.amount,
+            typicalPay: this.props.payday.amount,
             envelopePlans: plans
         })
     }
@@ -44,10 +45,24 @@ class PaydayPlan extends Component{
             envelopePlans: newArr
         })
     }
+    submit(){
+        const {envelopePlans} = this.state
+        let newPlan = {};
+        for(let i = 0; i < envelopePlans.length; i ++){
+            let id = envelopePlans[i].id;
+            newPlan[id] = envelopePlans[i].plannedAmount;
+        }
+        newPlan.amount = this.state.typicalPay
+        
+        this.props.changePlan(newPlan)
+        this.props.history.push('/payday')
+    }
     render(){
+        console.log(this.state.envelopePlans);
+        
         let editList = this.props.envelopes.map((enve, i) => {
             let {id, name, type} = enve;
-            let budgetedAmount = this.props.user.payday[id]
+            let budgetedAmount = this.props.payday[id]
             return (
                 <div>
                     <PaydayForm
@@ -62,7 +77,7 @@ class PaydayPlan extends Component{
         })
         let list = this.props.envelopes.map((enve, i) => {
             let {id, name, type} = enve;
-            let budgetedAmount = this.props.user.payday[id]
+            let budgetedAmount = this.props.payday[id]
             return (
                 <div>
                     <EnvelopeCard 
@@ -88,14 +103,15 @@ class PaydayPlan extends Component{
                     <input type="number"
                         value={this.state.typicalPay}
                         onChange={(e) => this.handlePay(e.target.value)}/>
-                        <br/>
-                        Unbudgeted: {this.state.typicalPay - subtractor} 
-                    {editList}                   
+                    <br/>
+                    Unbudgeted: {this.state.typicalPay - subtractor} 
+                    {editList}
+                    <button onClick={() => this.submit()}>Save new Payday Plan</button>             
                 </div>
                 :
                 <div>
                     <h1>Payday  Plan</h1>
-                    Typical Payday:${this.props.user.payday.amount}
+                    Typical Payday:${this.props.payday.amount}
                     {list}
                     <button onClick={() => this.handleEdit()}>Update Plan</button>
                 </div>
@@ -108,8 +124,9 @@ class PaydayPlan extends Component{
 function mapStateToProps(state){
     return{
         user: state.user,
-        envelopes: state.envelopes
+        envelopes: state.envelopes,
+        payday: state.payday
     }
 }
 
-export default connect(mapStateToProps)(PaydayPlan);
+export default connect(mapStateToProps, {changePlan})(PaydayPlan);

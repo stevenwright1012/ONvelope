@@ -3,7 +3,8 @@ import axios from 'axios';
 const initailState = {
     user:{},
     transactions:[],
-    envelopes: []
+    envelopes: [],
+    payday: {}
 }
 
 const GET_USER_INFO ='GET_USER_INFO';
@@ -12,12 +13,13 @@ const GET_ALL_ENVELOPES = 'GET_ALL_ENVELOPES';
 const DELETE_TRANS = 'DELETE_TRANS';
 const ADD_TRAN = "ADD_TRAN";
 const MOVE = "MOVE";
+const CHANGE_PLAN = 'CHANGE_PLAN'
 
 export default function reducer(state = initailState, action){
      
     switch (action.type) {
         case GET_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, {user: action.payload})
+            return Object.assign({}, state, {user: action.payload, payday: action.payload.payday})
         case GET_ALL_TRANS + '_FULFILLED':
             return Object.assign({}, state, {transactions: action.payload})
         case GET_ALL_ENVELOPES + '_FULFILLED':
@@ -27,7 +29,9 @@ export default function reducer(state = initailState, action){
         case ADD_TRAN + "_FULFILLED":
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
         case MOVE + "_FULFILLED":
-            return Object.assign({}, state, {envelopes: action.payload})
+            return Object.assign({}, state, {envelopes: action.payload});
+        case CHANGE_PLAN + "_FULFILLED":
+            return Object.assign({}, state, {payday: action.payload})
         default:
             return state;
     }
@@ -98,5 +102,16 @@ export function move(envelopes){
     return{
         type: MOVE,
         payload: envelopes
+    }
+}
+export function changePlan(plan){
+    let payday = axios.put('/api/plan', plan).then( res => {
+        return res.data  
+    })
+    console.log(payday);
+    
+    return {
+        type: CHANGE_PLAN,
+        payload: payday[0]
     }
 }

@@ -80,4 +80,7 @@ app.get('/api/envelopes/:id', con.allEnvelopes)
 app.post('/api/addenvelope', con.addEnvelope)
 app.put('/api/move', con.move)
 
+//////User endpoint//////
+app.put('/api/plan', con.changePlan)
+
 app.listen(3005, () => console.log("listening on 3005"));

@@ -69,4 +69,13 @@ module.exports = {
             res.status(200).send(envelopes);
         }).catch(console.log)
     },
+    changePlan: (req, res) => {
+        const db = req.app.get('db');
+        const{user_id} = req.user
+        console.log(req.body);
+        
+        db.change_plan([req.body, user_id]).then(user => {
+            res.status(200).send(user);
+        }).catch(console.log)
+    },
 }

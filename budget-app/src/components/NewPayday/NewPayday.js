@@ -20,14 +20,14 @@ class NewPayday extends Component{
             let {id, name, type} = env
             var envObj ={
                 id: id,
-                amount: this.props.user.payday[id],
+                amount: this.props.payday[id],
                 name: name,
                 type: type,
             }
             return envObj
         })
         this.setState({
-            amount: +this.props.user.payday.amount,
+            amount: +this.props.payday.amount,
             depoEnvelopes: arr
         })
     }
@@ -68,6 +68,8 @@ class NewPayday extends Component{
         }
     }
     render(){
+        console.log(this.props.payday);
+        
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
             return prev + next.amount
         },0)
@@ -81,7 +83,7 @@ class NewPayday extends Component{
                     name={name}
                     type={type}
                     amount={amount}
-                    budgetedAmount={+this.props.user.payday[id]}
+                    budgetedAmount={+this.props.payday[id]}
                     totalFn={this.calulateTotal}
                     />
                 </div>
@@ -107,7 +109,8 @@ class NewPayday extends Component{
 function mapStateToProps(state){
     return{
         user: state.user,
-        envelopes: state.envelopes
+        envelopes: state.envelopes,
+        payday: state.payday
     }
 }
 
