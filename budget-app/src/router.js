@@ -23,7 +23,7 @@ export default(
         <Route path='/plan' component={PaydayPlan}/>
         <Route path='/addenvelope' component={AddEnvelope}/>
         <Route path='/move' component={Move}/>
-        <Route path='/setup' component={}/>
+        <Route path='/setup' component={Setup}/>
 
     </Switch>
 )
