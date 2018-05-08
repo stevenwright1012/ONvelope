@@ -80,7 +80,14 @@ app.get('/api/envelopes/:id', con.allEnvelopes)
 app.post('/api/addenvelope', con.addEnvelope)
 app.put('/api/move', con.move)
 
-//////User endpoint//////
+//////Payday endpoint//////
 app.put('/api/plan', con.changePlan)
+
+/////Logout//////
+app.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('http://localhost:3000')
+})
+
 
 app.listen(3005, () => console.log("listening on 3005"));

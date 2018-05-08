@@ -1,3 +1,4 @@
-SELECT * from transactions
-WHERE user_id = $1
-ORDER BY id DESC
+select * from transactions t
+JOIN envelopes e on e.id = t.envelope
+WHERE t.user_id = 1
+ORDER BY t.id DESC

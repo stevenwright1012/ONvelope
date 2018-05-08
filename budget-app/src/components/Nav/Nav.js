@@ -28,9 +28,9 @@ export default  function Nav(){
             <Link to='/move'>
                 <button className='nav_button'>Move</button>
             </Link>
-            <Link to='/'>
+            <a href="http://localhost:3005/logout">
                 <button className='nav_button' id='logout'>Logout</button>
-            </Link>
+            </a> 
         </div>
     )
 }

@@ -6,7 +6,7 @@ import {deleteTrans} from '../../ducks/reducer'
 class TransactionCard extends React.Component{
 
     render(){
-        const {id, payee, amount, envelope, status, note} = this.props;
+        const {id, payee, amount, envelope, name, status, note} = this.props;
 
         var pending = '';
         if(status){
@@ -16,7 +16,7 @@ class TransactionCard extends React.Component{
             pending = "Pending"
         }
 
-        var envelopeName = this.props.envelopes.filter( item => item.id=== +envelope)
+      
 
         return (
             <div className="tran_card">
@@ -27,7 +27,7 @@ class TransactionCard extends React.Component{
                     payee: {payee}
                     <p>amount:{amount}</p>
                     <p>
-                    envelope:{envelopeName[0].name}
+                    envelope:{name}
                     </p>
                     <p>
                     {pending}
@@ -43,7 +43,7 @@ class TransactionCard extends React.Component{
                     payee: {payee}
                     <p>amount:{amount}</p>
                     <p>
-                    envelope:{envelopeName[0].name}
+                    envelope:{name}
                     </p>
                     <p>
                     {pending}

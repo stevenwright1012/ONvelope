@@ -125,6 +125,7 @@ class AllTransactions extends Component{
                 payee={tran.payee}
                 amount={tran.amount}
                 envelope={tran.envelope}
+                name={tran.name}
                 note={tran.note}
                 status={tran.status}/>
             )
