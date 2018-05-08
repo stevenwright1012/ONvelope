@@ -1,0 +1,15 @@
+.fixed{
+    position: fixed;
+    z-index: 2;
+    background: white;
+    border-bottom: 2px solid black;
+}
+.cards{
+    position: relative;
+    top: 290.02px;
+    z-index: 1;
+    align-items: center
+}
+.content{
+    justify-content: center;
+}

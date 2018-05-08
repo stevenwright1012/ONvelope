@@ -16,6 +16,7 @@ const ADD_TRAN = "ADD_TRAN";
 const MOVE = "MOVE";
 const CHANGE_PLAN = 'CHANGE_PLAN';
 const REDIRECT_FALSE = 'REDIRECT_FALSE';
+const EDIT_TRANS = 'EDIT_TRANS';
 
 export default function reducer(state = initailState, action){
      
@@ -33,11 +34,11 @@ export default function reducer(state = initailState, action){
         case MOVE + "_FULFILLED":
             return Object.assign({}, state, {envelopes: action.payload});
         case CHANGE_PLAN + "_FULFILLED":
-            console.log(action.payload);
-            
             return Object.assign({}, state, {payday: action.payload.payday, redirect: true});
         case REDIRECT_FALSE:
-            return Object.assign({}, state, {redirect: false})
+            return Object.assign({}, state, {redirect: false});
+        case EDIT_TRANS:
+            return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
         default:
             return state;
     }
@@ -124,6 +125,14 @@ export function changePlan(plan){
 export function redirectFalse(){
     return {
         type: REDIRECT_FALSE,
-        paylaoad: false
+        payload: false
+    }
+}
+export function editTrans(obj){
+    console.log(obj);
+    
+    return{
+        type: EDIT_TRANS,
+        payload: obj
     }
 }

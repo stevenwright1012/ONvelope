@@ -80,4 +80,30 @@ module.exports = {
             res.status(200).send(user[0]);
         }).catch(console.log)
     },
+    editTrans: (req, res) => {
+        const db = req.app.get('db');
+        const{user_id} = req.user
+        const{trans_id, payee, amountOG, amountNew, envelopeOG, envelopeNew, statusOG, statusNew, note} = req.body
+        let tempArr=[]
+        let difference = amountNew - amountOG
+        
+        tempArr.push(db.edit_trans([payee, amountNew, envelopeNew, statusNew, note, trans_id, user_id]));
+        if(statusOG === false && statusNew === true){
+            tempArr.push(db.alter_total([amountNew, user_id]));
+        }
+        else if(statusOG === true && statusNew === false){
+            tempArr.push(db.alter_total([(amountOG * -1), user_id]));                
+        }
+        else if(statusOG === true && statusNew === true){
+            tempArr.push(db.alter_total([difference, user_id]));                            
+        }
+        else if (statusOG === false && statusNew === false){
+            tempArr.push(db.alter_total([0, user_id]));
+        }
+        tempArr.push(db.envelope_edit([amountOG, envelopeOG, amountNew, envelopeNew, user_id])); 
+
+        Promise.all(tempArr).then(values => {
+            res.status(200).send(values);
+        }).catch(console.log)
+    },
 }

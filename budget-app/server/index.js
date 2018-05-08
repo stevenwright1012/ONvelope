@@ -74,6 +74,7 @@ app.get('/auth/me', (req, res) => {
 app.get('/api/trans/:id', con.allTrans)
 app.post('/api/addtrans', con.addTrans)
 app.put('/api/delete', con.deleteTrans)
+app.put('/api/edit', con.editTrans)
 
 /////envelope endpoints/////
 app.get('/api/envelopes/:id', con.allEnvelopes)

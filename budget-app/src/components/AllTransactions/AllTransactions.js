@@ -4,6 +4,7 @@ import Balance from '../Balance/Balance';
 import TransactionCard from '../TransactionCard/TransactionCard';
 import {getTransactions, getUser, redirectFalse} from '../../ducks/reducer'
 import {connect} from 'react-redux';
+import './AllTransactions.css'
 
 
 class AllTransactions extends Component{
@@ -150,17 +151,21 @@ class AllTransactions extends Component{
         return(
             <div className='main'>
                 <Nav />
-                <div>
-                    <h1>All Transactions</h1>
-                    <Balance />
-                    <button onClick={() => this.updateFilteredList('ALL')}>All</button>                    
-                    <button onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
-                    <button onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
-                    <button onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>                    
-                    <button onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
-                    <button onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
-                    <button onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>                    
-                    {cards}
+                <div className ="Content">
+                    <div className="fixed">
+                        <h1>All Transactions</h1>
+                        <Balance />
+                        <button onClick={() => this.updateFilteredList('ALL')}>All</button>                    
+                        <button onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
+                        <button onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
+                        <button onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>                    
+                        <button onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
+                        <button onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
+                        <button onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>                    
+                    </div>
+                    <div className="cards">
+                        {cards}
+                    </div>
                 </div>
             </div>
         )

@@ -9,6 +9,7 @@ import NewPayday from './components/NewPayday/NewPayday';
 import PaydayPlan from './components/PaydayPlan/PaydayPlan';
 import AddEnvelope from './components/AddEnvelope/AddEnvelope';
 import Move from './components/Move/Move'
+import Setup from './components/Setup/Setup'
 
 
 export default(
@@ -22,6 +23,7 @@ export default(
         <Route path='/plan' component={PaydayPlan}/>
         <Route path='/addenvelope' component={AddEnvelope}/>
         <Route path='/move' component={Move}/>
-        
+        <Route path='/setup' component={}/>
+
     </Switch>
 )
