@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import EnvelopeRow from '../EnvelopeRow/EnvelopeRow'
-import {addTrans} from '../../ducks/reducer'
+import {addTrans, redirectFalse} from '../../ducks/reducer'
 
 class AddDeposit extends Component{
     constructor(){
@@ -15,6 +15,11 @@ class AddDeposit extends Component{
             depoEnvelopes: []
         }
     this.calulateTotal = this.calulateTotal.bind(this)
+    }
+    componentDidUpdate(){
+        if(this.props.redirect){
+            setTimeout(()=>{ this.props.history.push('/transactions') }, 1000)
+        }
     }
     handleAmount(e){
         this.setState({
@@ -50,7 +55,6 @@ class AddDeposit extends Component{
                 this.props.addTrans(this.state.payer, (obj.depAmount*-1), obj.id, this.state.status, null)
             }
         }
-        this.props.history.push('/transactions')
     }
     render(){
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
@@ -100,8 +104,9 @@ class AddDeposit extends Component{
 
 function mapStateToProps(state){
     return {
-        envelopes: state.envelopes
+        envelopes: state.envelopes,
+        redirect: state.redirect
     }
 }
 
-export default connect(mapStateToProps, {addTrans})(AddDeposit);
+export default connect(mapStateToProps, {addTrans, redirectFalse})(AddDeposit);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
-import EnvelopeCard from '../EnvelopeCard/EnvelopeCard';
+// import EnvelopeCard from '../EnvelopeCard/EnvelopeCard';
 import PaydayForm from '../PaydayForm/PaydayForm';
 import {changePlan} from '../../ducks/reducer'
 
@@ -27,6 +27,11 @@ class PaydayPlan extends Component{
             typicalPay: this.props.payday.amount,
             envelopePlans: plans
         })
+    }
+    componentDidUpdate(){
+        if(this.props.redirect){
+            setTimeout(()=>{ this.props.history.push('/payday') }, 1000)
+        }
     }
     handleEdit(){
         this.setState({
@@ -55,11 +60,8 @@ class PaydayPlan extends Component{
         newPlan.amount = this.state.typicalPay
         
         this.props.changePlan(newPlan)
-        this.props.history.push('/payday')
     }
     render(){
-        console.log(this.state.envelopePlans);
-        
         let editList = this.props.envelopes.map((enve, i) => {
             let {id, name, type} = enve;
             let budgetedAmount = this.props.payday[id]
@@ -75,28 +77,12 @@ class PaydayPlan extends Component{
                 </div>
             )
         })
-        let list = this.props.envelopes.map((enve, i) => {
-            let {id, name, type} = enve;
-            let budgetedAmount = this.props.payday[id]
-            return (
-                <div>
-                    <EnvelopeCard 
-                    key = {i}
-                    id = {id}
-                    name = {name}
-                    type = {type}
-                    amount = {+budgetedAmount}/>
-                </div>
-            )
-        })
         let subtractor = this.state.envelopePlans.reduce((prev, next) => {
             return prev + next.plannedAmount
         },0)
         return(
             <div className='main'>
                 <Nav />
-                {this.state.edit
-                ?
                 <div>
                     <h1>Payday  Plan</h1>
                     Typical Payday:<i>$</i>
@@ -108,14 +94,6 @@ class PaydayPlan extends Component{
                     {editList}
                     <button onClick={() => this.submit()}>Save new Payday Plan</button>             
                 </div>
-                :
-                <div>
-                    <h1>Payday  Plan</h1>
-                    Typical Payday:${this.props.payday.amount}
-                    {list}
-                    <button onClick={() => this.handleEdit()}>Update Plan</button>
-                </div>
-                }
             </div>
         )
     }
@@ -125,7 +103,8 @@ function mapStateToProps(state){
     return{
         user: state.user,
         envelopes: state.envelopes,
-        payday: state.payday
+        payday: state.payday,
+        redirect: state.redirect
     }
 }
 

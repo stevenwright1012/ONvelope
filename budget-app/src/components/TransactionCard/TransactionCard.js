@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {deleteTrans} from '../../ducks/reducer'
 
 class TransactionCard extends React.Component{
-
     render(){
         const {id, payee, amount, envelope, name, status, note} = this.props;
 
@@ -20,41 +19,20 @@ class TransactionCard extends React.Component{
 
         return (
             <div className="tran_card">
-                {
-                    amount > 0
-                ?
-                    <div id="pos">
-                    payee: {payee}
-                    <p>amount:{amount}</p>
-                    <p>
-                    envelope:{name}
-                    </p>
-                    <p>
-                    {pending}
-                    </p>
-                    <p>
-                    note:{note}
-                    </p>
-                    <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
-                    <button>Edit</button>
+                    <div id={this.props.styles}>
+                        payee: {payee}
+                        <p>amount:{amount}</p>
+                        <p>
+                        envelope:{name}
+                        </p>
+                        <p>
+                        {pending}
+                        </p>
+                        <p>
+                        note:{note}
+                        </p>
+                        <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
                     </div>
-                :
-                    <div id="neg">
-                    payee: {payee}
-                    <p>amount:{amount}</p>
-                    <p>
-                    envelope:{name}
-                    </p>
-                    <p>
-                    {pending}
-                    </p>
-                    <p>
-                    note:{note}
-                    </p>
-                    <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
-                    <button>Edit</button>
-                    </div>
-                }
             </div>
         )
     }

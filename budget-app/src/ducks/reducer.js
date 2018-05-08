@@ -4,7 +4,8 @@ const initailState = {
     user:{},
     transactions:[],
     envelopes: [],
-    payday: {}
+    payday: {},
+    redirect: false
 }
 
 const GET_USER_INFO ='GET_USER_INFO';
@@ -13,7 +14,8 @@ const GET_ALL_ENVELOPES = 'GET_ALL_ENVELOPES';
 const DELETE_TRANS = 'DELETE_TRANS';
 const ADD_TRAN = "ADD_TRAN";
 const MOVE = "MOVE";
-const CHANGE_PLAN = 'CHANGE_PLAN'
+const CHANGE_PLAN = 'CHANGE_PLAN';
+const REDIRECT_FALSE = 'REDIRECT_FALSE';
 
 export default function reducer(state = initailState, action){
      
@@ -27,11 +29,15 @@ export default function reducer(state = initailState, action){
         case DELETE_TRANS + '_FULFILLED':
             return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
         case ADD_TRAN + "_FULFILLED":
-            return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2]})
+            return Object.assign({}, state, {user: action.payload[1][0], transactions: action.payload[0], envelopes: action.payload[2], redirect: true})
         case MOVE + "_FULFILLED":
             return Object.assign({}, state, {envelopes: action.payload});
         case CHANGE_PLAN + "_FULFILLED":
-            return Object.assign({}, state, {payday: action.payload})
+            console.log(action.payload);
+            
+            return Object.assign({}, state, {payday: action.payload.payday, redirect: true});
+        case REDIRECT_FALSE:
+            return Object.assign({}, state, {redirect: false})
         default:
             return state;
     }
@@ -112,6 +118,12 @@ export function changePlan(plan){
     
     return {
         type: CHANGE_PLAN,
-        payload: payday[0]
+        payload: payday
+    }
+}
+export function redirectFalse(){
+    return {
+        type: REDIRECT_FALSE,
+        paylaoad: false
     }
 }

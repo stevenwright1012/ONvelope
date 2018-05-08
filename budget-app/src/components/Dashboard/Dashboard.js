@@ -3,21 +3,21 @@ import Nav from '../Nav/Nav';
 import './Dashboard.css';
 import Balance from '../Balance/Balance';
 import {connect} from 'react-redux';
-import {getUser, getTransactions, getEnvelopes} from '../../ducks/reducer';
+import {getUser, getTransactions, getEnvelopes, redirectFalse} from '../../ducks/reducer';
 import {Link} from 'react-router-dom';
 import EnvelopeCard from '../EnvelopeCard/EnvelopeCard'
 // import axios from 'axios';
 
 class Dashboard extends Component{
     componentDidMount(){
-        this.props.getUser()
+        this.props.getUser();
+        this.props.redirectFalse();
     }
     componentDidUpdate(){
         this.props.getTransactions(this.props.user.user_id);
         this.props.getEnvelopes(this.props.user.user_id)
     }
     render(){
-
         
         let list = this.props.envelopes.map((enve, i) => {
             let {id, name, type, amount} = enve; 
@@ -50,4 +50,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getUser, getTransactions, getEnvelopes})(Dashboard);
+export default connect(mapStateToProps, {getUser, getTransactions, getEnvelopes, redirectFalse})(Dashboard);

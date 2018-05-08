@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import PaydayEnvelope from '../PaydayEnvelope/PaydayEnvelope';
-import {addTrans} from '../../ducks/reducer'
+import {addTrans, redirectFalse, getUser} from '../../ducks/reducer'
 
 
 class NewPayday extends Component{
@@ -16,6 +16,8 @@ class NewPayday extends Component{
     this.calulateTotal = this.calculateTotal.bind(this);
     }
     componentDidMount(){
+        this.props.redirectFalse();
+        this.props.getUser()
         var arr = this.props.envelopes.map(env => {
             let {id, name, type} = env
             var envObj ={
@@ -61,10 +63,15 @@ class NewPayday extends Component{
                     this.props.addTrans(`${month}/${day}/${year}`, (obj.amount*-1), obj.id, true, `Paycheck submited ${month}/${day}/${year}`)
                 }
             }
-            setTimeout(() => {this.props.history.push('/transactions')}, 3000)
+            // setTimeout(() => {this.props.history.push('/transactions')}, 3000)
         }
         else{
             alert("Every dollar must be assigned to an envelope before you can submit")
+        }
+    }
+    componentDidUpdate(){
+        if(this.props.redirect){
+            setTimeout(() => {this.props.history.push('/transactions')}, 2000)
         }
     }
     render(){
@@ -110,8 +117,9 @@ function mapStateToProps(state){
     return{
         user: state.user,
         envelopes: state.envelopes,
-        payday: state.payday
+        payday: state.payday,
+        redirect: state.redirect 
     }
 }
 
-export default connect(mapStateToProps, {addTrans})(NewPayday);
+export default connect(mapStateToProps, {addTrans, redirectFalse, getUser})(NewPayday);

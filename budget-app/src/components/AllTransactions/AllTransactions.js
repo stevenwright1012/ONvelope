@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import Balance from '../Balance/Balance';
 import TransactionCard from '../TransactionCard/TransactionCard';
-import {getTransactions, getUser} from '../../ducks/reducer'
+import {getTransactions, getUser, redirectFalse} from '../../ducks/reducer'
 import {connect} from 'react-redux';
 
 
@@ -17,7 +17,8 @@ class AllTransactions extends Component{
     }
     componentDidMount(){
         this.props.getTransactions(this.props.user.user_id);
-        // this.getUser()
+        this.props.getUser()
+        this.props.redirectFalse()
         this.setState({
             filteredList: this.props.transactions,
         })
@@ -119,16 +120,32 @@ class AllTransactions extends Component{
     }
     render(){
         var cards = this.state.filteredList.map((tran, i) => {
-            return (
-                <TransactionCard key={i}
-                id={tran.trans_id}
-                payee={tran.payee}
-                amount={tran.trans_amount}
-                envelope={tran.envelope}
-                name={tran.name}
-                note={tran.note}
-                status={tran.status}/>
-            )
+            if(tran.trans_amount > 0){
+                return (
+                    <TransactionCard key={i}
+                    id={tran.trans_id}
+                    payee={tran.payee}
+                    amount={tran.trans_amount}
+                    envelope={tran.envelope}
+                    name={tran.name}
+                    note={tran.note}
+                    status={tran.status}
+                    styles='pos'/>
+                )
+            }
+            else{
+                return (
+                    <TransactionCard key={i}
+                    id={tran.trans_id}
+                    payee={tran.payee}
+                    amount={tran.trans_amount}
+                    envelope={tran.envelope}
+                    name={tran.name}
+                    note={tran.note}
+                    status={tran.status}
+                    styles='neg'/>
+                )
+            }
         })
         return(
             <div className='main'>
@@ -157,4 +174,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getTransactions, getUser})(AllTransactions);
+export default connect(mapStateToProps, {getTransactions, getUser, redirectFalse})(AllTransactions);

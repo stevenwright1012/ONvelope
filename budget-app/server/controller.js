@@ -72,10 +72,12 @@ module.exports = {
     changePlan: (req, res) => {
         const db = req.app.get('db');
         const{user_id} = req.user
-        console.log(req.body);
+        // console.log(req.body);
         
         db.change_plan([req.body, user_id]).then(user => {
-            res.status(200).send(user);
+            console.log(user);
+            
+            res.status(200).send(user[0]);
         }).catch(console.log)
     },
 }
