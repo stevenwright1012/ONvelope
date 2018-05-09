@@ -6,17 +6,38 @@
     display: block;
     background: gainsboro;
     box-sizing: border-box;
+    align-items: center
 }
 #logo{
-    background: rgb(99, 224, 255);
+    background: rgb(81, 83, 83);
     box-sizing: border-box;
-    padding: 2px;
+    padding: 3px 3px 0 2px;
+    width: 100%
 }
 img{
     width: 100%;
     box-sizing: border-box;
 }
 .nav_button{
-    margin-bottom: 5vh;
-    width: 100%;
+    width: 70%;
+    border: 0;
+    align-content: center
+}
+.icon{
+    display: inline-block;
+}
+p{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 14px;
+}
+a{
+    text-decoration: none;
+    color: black
+}
+#logout{
+    position: relative;
+    bottom: 0;
 }

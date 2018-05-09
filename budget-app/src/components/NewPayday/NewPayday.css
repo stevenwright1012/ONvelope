@@ -1,0 +1,11 @@
+.money_input {
+    background-image: url("./dollar.png");
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    font-size: 15px;
+    background-color: aqua
+}
+input{
+    border: 0;
+    border-radius: 5px;
+}

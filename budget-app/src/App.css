@@ -2,8 +2,13 @@
   text-align: center;
 }
 .main{
-  display: flex;
+  /* display: flex; */
   position: absolute;
   left: 20vw;
-  /* width: 100%; */
+  background: blue;
+  width: 80vw;
+  height: 100%;
+  text-align: center;
+  align-items: center
 }
+

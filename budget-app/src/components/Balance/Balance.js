@@ -18,9 +18,9 @@ class Balance extends Component{
         return(
             <div className='card'>
                 <h4>Balance</h4>
-                <p>Current: ${this.props.user.total}</p>
-                <p>Pending: ${pending}</p>
-                <p>Available:${+this.props.user.total + pending} </p>
+                <p>Current: ${(+this.props.user.total).toFixed(2)}</p>
+                <p>Pending: ${pending.toFixed(2)}</p>
+                <p>Available:${(+this.props.user.total + pending).toFixed(2)} </p>
             </div>
         )
     }

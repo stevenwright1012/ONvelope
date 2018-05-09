@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import PaydayEnvelope from '../PaydayEnvelope/PaydayEnvelope';
-import {addTrans, redirectFalse, getUser} from '../../ducks/reducer'
+import {addTrans, redirectFalse, getUser} from '../../ducks/reducer';
+import './NewPayday.css'
 
 
 class NewPayday extends Component{
@@ -22,14 +23,14 @@ class NewPayday extends Component{
             let {id, name, type} = env
             var envObj ={
                 id: id,
-                amount: this.props.payday[id],
+                amount: (+this.props.payday[id]),
                 name: name,
                 type: type,
             }
             return envObj
         })
         this.setState({
-            amount: +this.props.payday.amount,
+            amount: (+this.props.payday.amount).toFixed(2),
             depoEnvelopes: arr
         })
     }
@@ -83,7 +84,7 @@ class NewPayday extends Component{
         let enevlopeRows = this.props.envelopes.map( (envelope, i) => {
             let {id, name, type, amount} = envelope;
             return (
-                <div>
+                <div className="payday_envelope">
                     <PaydayEnvelope
                     key={i}
                     id={id}
@@ -100,10 +101,16 @@ class NewPayday extends Component{
             <div className='main'>
                 <Nav />
                 <div>
-                    <h1>NewPayday</h1>
-                    <input type="number" value={this.state.amount} onChange={(e) => this.handleAmount(e.target.value)}/>
-                    <br/>
-                    Unbudgeted:{this.state.amount - subtractor}
+                    <div className="fixed">
+                        <h1>NewPayday</h1>
+                        <label>
+                            Actual Paycheck amount:
+                            <input type="number" value={this.state.amount} onChange={(e) => this.handleAmount(e.target.value)}
+                            className="money_input"/>
+                        </label>
+                        <br/>
+                        Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
+                    </div>
                     {enevlopeRows}
                     <br/>
                     <button onClick={() => this.submitToTrans()}>Send To Transactions</button>

@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav'
 import {connect} from 'react-redux';
 import {move} from '../../ducks/reducer';
 import axios from 'axios';
+import CurrencyInput from 'react-currency-input';
 
 class Move extends Component{
     constructor(){
@@ -11,7 +12,7 @@ class Move extends Component{
         this.state ={
             from: 0,
             to: 0,
-            amount: 0
+            amount: null,
         }
     }
     handleFrom(e){
@@ -28,6 +29,9 @@ class Move extends Component{
         this.setState({
             amount: e
         })
+    }
+    setTwoDeciamls(e){
+        this.value = parseFloat(this.value).toFixed(2)
     }
     submit(){
         if(this.state.amount){
@@ -77,7 +81,13 @@ class Move extends Component{
                         ?
                         <div>
                             <h3>How much would you like to move from "{fromName[0].name}"" into "{toName[0].name}"?</h3>
-                            <input type="number" value={this.state.amount} placeholder={"00.00"} onChange={(e) => this.handleAmount(e.target.value)}/>
+                                <input type="number" 
+                                value={this.state.amount} 
+                                placeholder={"00.00"} 
+                                onChange={(e) => this.handleAmount(e.target.value)}
+                                className="money_input"
+                                min='0'
+                                step=".01"/>
                             <button onClick={() => this.submit()}>Submit</button>
                         </div>
                         :

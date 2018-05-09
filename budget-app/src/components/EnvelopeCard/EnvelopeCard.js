@@ -12,7 +12,7 @@ class EnvelopeCard extends React.Component{
         }
         else{
             axios.delete(`/api/envdelete/${id}`).then(res => {
-                
+
             })
         }
     }
@@ -20,11 +20,17 @@ class EnvelopeCard extends React.Component{
         let {name, type, amount} = this.props
         return(
             <div className="envelope">
-                Name:{name}
+                Envelope:{name}
                 <br/>
                 Type:{type},  
-                Amount:{+amount}
+                Amount:${(+amount).toFixed(2)}
+                {
+                +amount
+                ?
+                null
+                :
                 <button onClick={() => this.deleteEnvelope()}>Delete Envelope</button>
+                }
             </div>
         )
     }

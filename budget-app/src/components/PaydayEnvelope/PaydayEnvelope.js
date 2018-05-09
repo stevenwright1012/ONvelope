@@ -29,18 +29,17 @@ class PaydayEnvelope extends React.Component{
         let {name, type, amount} = this.props
         return (
             <div className="envelope">
-                <h3>PaydayEnvelope</h3>
+                <h3>{name}</h3>
                 <div>
-                    Name:{name}
+                    Type:{type},
                     <br/>
-                    Type:{type},  
-                    current amount:{+amount}
-                    <br/>
-                    New amount:{+amount + this.state.budgetedAmount}
+                    current amount:${(+amount).toFixed(2)}
                     <br/>
                     <input type="number" value={this.state.budgetedAmount} 
                     onChange={(e) => this.handleAmount(+e.target.value)}
-                    />
+                    className="money_input"/>
+                    <br/>
+                    New amount:${(+amount + this.state.budgetedAmount).toFixed(2)}
 
                 </div>
             </div>

@@ -7,29 +7,44 @@ export default  function Nav(){
         <div className="nav_bar">
             <Link to='/dashboard'>
                 <div className='nav_button' id='logo'>
-                    <img src="http://www.iconarchive.com/download/i95978/iconsmind/outline/Envelope.ico" alt=""/>
+                    <img src="./icons/ONvelope.png" alt=""/>
                 </div>
             </Link>
             <Link to='/deposit'>
-                <button className='nav_button' id='deposit'>Deposit</button>
+                <button className='nav_button' id='deposit'>
+                <img src="./icons/deposit.png" alt=""/>
+                Deposit</button>
             </Link>
             <Link to='/trans'>
-                <button className='nav_button'>addTrans</button>
+                <button className='nav_button'>
+                <img src="./icons/addtrans.png" alt=""/>
+                Add Transaction</button>
             </Link>
             <Link to='/transactions'>
-                <button className='nav_button'>AllTrans</button>
+                <button className='nav_button'>
+                <img src="./icons/alltrans.png" alt=""/>
+                AllTrans</button>
             </Link>
             <Link to='/payday'>
-                <button className='nav_button'>Payday</button>
+                <button className='nav_button'>
+                <img src="./icons/payday.png" alt=""/>
+                Payday</button>
             </Link>
             <Link to='/plan'>
-                <button className='nav_button'>Plan</button>
+                <div className='nav_button'>
+                    <img src="./icons/plan.png" alt="" className="icon"/>
+                    <p>Plan</p>
+                </div>
             </Link>
             <Link to='/move'>
-                <button className='nav_button'>Move</button>
+                <button className='nav_button'>
+                <img src="./icons/exchange.png" alt=""/>
+                Move</button>
             </Link>
             <a href="http://localhost:3005/logout">
-                <button className='nav_button' id='logout'>Logout</button>
+                <button className='nav_button' id='logout'>
+                <img src="./icons/logout.png" alt=""/>
+                Logout</button>
             </a> 
         </div>
     )
