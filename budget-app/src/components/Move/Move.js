@@ -14,6 +14,7 @@ class Move extends Component{
             to: 0,
             amount: null,
         }
+        this.handleAmount = this.handleAmount.bind(this)
     }
     handleFrom(e){
         this.setState({
@@ -25,13 +26,10 @@ class Move extends Component{
             to: e
         })
     }   
-    handleAmount(e){
+    handleAmount(e, maskedvalue, floatvalue){       
         this.setState({
-            amount: e
+            amount: floatvalue
         })
-    }
-    setTwoDeciamls(e){
-        this.value = parseFloat(this.value).toFixed(2)
     }
     submit(){
         if(this.state.amount){
@@ -81,13 +79,12 @@ class Move extends Component{
                         ?
                         <div>
                             <h3>How much would you like to move from "{fromName[0].name}"" into "{toName[0].name}"?</h3>
-                                <input type="number" 
+                                <CurrencyInput 
                                 value={this.state.amount} 
-                                placeholder={"00.00"} 
-                                onChange={(e) => this.handleAmount(e.target.value)}
-                                className="money_input"
-                                min='0'
-                                step=".01"/>
+                                placeholder="$0.00"
+                                onChangeEvent={this.handleAmount}
+                                prefix="$"
+                                />
                             <button onClick={() => this.submit()}>Submit</button>
                         </div>
                         :

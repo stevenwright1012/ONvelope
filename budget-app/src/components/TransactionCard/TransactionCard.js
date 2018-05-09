@@ -2,7 +2,8 @@ import React from 'react';
 import './TransactionCard.css';
 import {connect} from 'react-redux';
 import {deleteTrans, editTrans} from '../../ducks/reducer';
-import axios from 'axios'
+import axios from 'axios';
+import CurrencyInput from 'react-currency-input';
 
 class TransactionCard extends React.Component{
     constructor(){
@@ -19,6 +20,7 @@ class TransactionCard extends React.Component{
             statusNew: null,
             note: ''
         }
+        this.handleAmount =this.handleAmount.bind(this)
     }
     componentDidMount(){
         const {payee, amount, envelope, status, note} = this.props;
@@ -48,9 +50,9 @@ class TransactionCard extends React.Component{
             payee: e
         })
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         this.setState({
-            amountNew: e
+            amountNew: float
         })
     }
     handleEnvelopeNew(e){
@@ -116,7 +118,7 @@ class TransactionCard extends React.Component{
                 ?
                     <div id={this.props.styles}>
                         payee: {payee}
-                        <p>amount:{amount}</p>
+                        <p>amount:${(+amount).toFixed(2)}</p>
                         <p>
                         envelope:{name}
                         </p>
@@ -132,7 +134,11 @@ class TransactionCard extends React.Component{
                 :
                 <div id={this.props.styles}>
                         payee: <input type="text" value={this.state.payee} onChange={(e) => this.handlePayee(e.target.value)}/>
-                        <p>amount:<input type="text" value={this.state.amountNew} onChange={(e) => this.handleAmount(e.target.value)}/></p>
+                        <p>amount:<CurrencyInput 
+                                    value={this.state.amountNew} 
+                                    onChangeEvent={this.handleAmount}
+                                    prefix="$"
+                                    /></p>
                         <p>
                         envelope:
                         <select name="envelopes" value={this.state.envelopeNew} onChange={(e) => this.handleEnvelopeNew(e.target.value)}>

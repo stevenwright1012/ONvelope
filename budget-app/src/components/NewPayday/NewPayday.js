@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import PaydayEnvelope from '../PaydayEnvelope/PaydayEnvelope';
 import {addTrans, redirectFalse, getUser} from '../../ducks/reducer';
 import './NewPayday.css'
+import CurrencyInput from 'react-currency-input';
 
 
 class NewPayday extends Component{
@@ -15,6 +16,7 @@ class NewPayday extends Component{
             depoEnvelopes: []
         }
     this.calulateTotal = this.calculateTotal.bind(this);
+    this.handleAmount = this.handleAmount.bind(this);
     }
     componentDidMount(){
         this.props.redirectFalse();
@@ -34,9 +36,9 @@ class NewPayday extends Component{
             depoEnvelopes: arr
         })
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         this.setState({
-            amount: e
+            amount: float
         })
     }
     calculateTotal(obj){
@@ -105,8 +107,12 @@ class NewPayday extends Component{
                         <h1>NewPayday</h1>
                         <label>
                             Actual Paycheck amount:
-                            <input type="number" value={this.state.amount} onChange={(e) => this.handleAmount(e.target.value)}
-                            className="money_input"/>
+                            <CurrencyInput 
+                                value={this.state.amount} 
+                                placeholder="$0.00"
+                                onChangeEvent={this.handleAmount}
+                                prefix="$"
+                                />
                         </label>
                         <br/>
                         Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}

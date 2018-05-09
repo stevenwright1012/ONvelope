@@ -1,6 +1,7 @@
 import React from 'react';
 import '../EnvelopeCard/EnvelopeCard.css';
 import {connect} from 'react-redux';
+import CurrencyInput from 'react-currency-input'
 
 class PaydayForm extends React.Component{
     constructor(){
@@ -9,19 +10,20 @@ class PaydayForm extends React.Component{
         this.state ={
             plannedAmount: 0
         }
+        this.handleAmount = this.handleAmount.binf(this)
     }
     componentDidMount(){
         this.setState({
             plannedAmount: +this.props.user.payday[this.props.id]
         })
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         this.props.changeFn({
             id: this.props.id,
-            plannedAmount: e
+            plannedAmount: float
         })
         this.setState({
-            plannedAmount: e
+            plannedAmount: float
         })
     }
     render(){
@@ -31,9 +33,11 @@ class PaydayForm extends React.Component{
                 Name:{name}
                 <br/>
                 Type:{type},  
-                Amount: <input type="number"
-                value={this.state.plannedAmount}
-                onChange={(e) => this.handleAmount(+e.target.value)}/>
+                Amount:<CurrencyInput 
+                        value={this.state.amount} 
+                        onChangeEvent={this.handleAmount}
+                        prefix="$"
+                        />
             </div>
         )
     }

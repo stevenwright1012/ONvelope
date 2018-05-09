@@ -3,18 +3,19 @@ import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 // import EnvelopeCard from '../EnvelopeCard/EnvelopeCard';
 import PaydayForm from '../PaydayForm/PaydayForm';
-import {changePlan} from '../../ducks/reducer'
+import {changePlan} from '../../ducks/reducer';
+import CurrencyInput from 'react-currency-input';
 
 class PaydayPlan extends Component{
     constructor(){
         super()
 
         this.state = {
-            edit: false,
             typicalPay: 0,
             envelopePlans:[]
         }
         this.changePlans = this.changePlans.bind(this)
+        this.handlePay = this.handlePay.bind(this);
     }
     componentDidMount(){
         let plans = this.props.envelopes.map(env => {
@@ -33,14 +34,9 @@ class PaydayPlan extends Component{
             setTimeout(()=>{ this.props.history.push('/payday') }, 1000)
         }
     }
-    handleEdit(){
+    handlePay(e, mask, float){
         this.setState({
-            edit: true
-        })
-    }
-    handlePay(e){
-        this.setState({
-            typicalPay: e
+            typicalPay: float
         })
     }
     changePlans(obj){
@@ -85,10 +81,11 @@ class PaydayPlan extends Component{
                 <Nav />
                 <div>
                     <h1>Payday  Plan</h1>
-                    Typical Payday:<i>$</i>
-                    <input type="number"
-                        value={this.state.typicalPay}
-                        onChange={(e) => this.handlePay(e.target.value)}/>
+                    Typical Payday:<CurrencyInput 
+                                    value={this.state.typicalPay} 
+                                    onChangeEvent={this.handlePay}
+                                    prefix="$"
+                                    />
                     <br/>
                     Unbudgeted: {this.state.typicalPay - subtractor} 
                     {editList}

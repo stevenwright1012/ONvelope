@@ -1,4 +1,5 @@
 import React from 'react';
+import CurrencyInput from 'react-currency-input';
 
 class PaydayEnvelope extends React.Component{
     constructor(){
@@ -7,6 +8,7 @@ class PaydayEnvelope extends React.Component{
         this.state ={
             budgetedAmount: 0
         }
+        this.handleAmount = this.handleAmount.bind(this)
     }
     componentDidMount(){
         let plannedAmount = +this.props.budgetedAmount
@@ -14,15 +16,15 @@ class PaydayEnvelope extends React.Component{
             budgetedAmount: plannedAmount
         })
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         let {id, name, type} = this.props
         var obj = {id: id,
-                   amount: e,
+                   amount: float,
                    name: name,
                    type: type}
         this.props.totalFn(obj)
         this.setState({
-            budgetedAmount: e
+            budgetedAmount: float
         })
     }
     render(){
@@ -35,9 +37,12 @@ class PaydayEnvelope extends React.Component{
                     <br/>
                     current amount:${(+amount).toFixed(2)}
                     <br/>
-                    <input type="number" value={this.state.budgetedAmount} 
-                    onChange={(e) => this.handleAmount(+e.target.value)}
-                    className="money_input"/>
+                    <CurrencyInput 
+                    value={this.state.budgetedAmount} 
+                    placeholder="$0.00"
+                    onChangeEvent={this.handleAmount}
+                    prefix="$"
+                    />
                     <br/>
                     New amount:${(+amount + this.state.budgetedAmount).toFixed(2)}
 

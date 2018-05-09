@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav'
 import {connect} from 'react-redux';
 import {addTrans} from '../../ducks/reducer';
+import CurrencyInput from 'react-currency-input';
 
 class AddTransaction extends Component{
     constructor(){
@@ -15,15 +16,16 @@ class AddTransaction extends Component{
             note: '',
 
         }
+        this.handleAmount = this.handleAmount.bind(this)
     }
     handlePayee(e){
         this.setState({
             payee: e
         })
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         this.setState({
-            amount: e
+            amount: float
         })
     }
     handleEnvelope(e){
@@ -70,7 +72,12 @@ class AddTransaction extends Component{
                     <h1>AddTransaction</h1>
                     <input type="text" placeholder='Payee' onChange={(e) => this.handlePayee(e.target.value)}/>
                     <br/>
-                    <input type="number" placeholder='Amount'onChange={(e) => this.handleAmount(e.target.value)}/>
+                    <CurrencyInput 
+                        value={this.state.amount} 
+                        placeholder="Amount"
+                        onChangeEvent={this.handleAmount}
+                        prefix="$"
+                        />
                     <br/>
                     <select name="envelopes" value={this.state.envelope} onChange={(e) => this.handleEnvelope(e.target.value)}>
                         <option value="">Select Envelope</option>

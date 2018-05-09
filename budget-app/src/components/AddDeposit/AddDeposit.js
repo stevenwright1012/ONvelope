@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import EnvelopeRow from '../EnvelopeRow/EnvelopeRow'
-import {addTrans, redirectFalse} from '../../ducks/reducer'
+import {addTrans, redirectFalse} from '../../ducks/reducer';
+import CurrencyInput from 'react-currency-input';
 
 class AddDeposit extends Component{
     constructor(){
@@ -15,15 +16,16 @@ class AddDeposit extends Component{
             depoEnvelopes: []
         }
     this.calulateTotal = this.calulateTotal.bind(this)
+    this.handleAmount = this.handleAmount.bind(this)
     }
     componentDidUpdate(){
         if(this.props.redirect){
             setTimeout(()=>{ this.props.history.push('/transactions') }, 1000)
         }
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         this.setState({
-            amount: e,
+            amount: float,
         })
     }
     handlePayer(e){
@@ -80,8 +82,12 @@ class AddDeposit extends Component{
                 <Nav />
                 <div>
                     <h1>AddDeposit</h1>
-                    <input type="number" placeholder='How Much?' onChange={(e) => this.handleAmount(+e.target.value)}/>
-                    <input type="text" placeholder='From Who?' onChange={(e) => this.handlePayer(e.target.value)}/>
+                    <CurrencyInput 
+                    value={this.state.amount} 
+                    placeholder="How much?"
+                    onChangeEvent={this.handleAmount}
+                    prefix="$"/>
+                    <input type="text" placeholder='From Where?' onChange={(e) => this.handlePayer(e.target.value)}/>
                     <br/>
                     <label>
                         <input type="radio" name='status' onClick={() => this.handleStatusTrue()}/>
@@ -92,7 +98,7 @@ class AddDeposit extends Component{
                         Pending
                     </label>
                     <br/>
-                    Unbudgeted:{this.state.amount - subtractor}
+                    Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
                     {enevlopeRows}
                     <br/>
                     <button onClick={() => this.submitToTrans()}>Send to transactions</button>

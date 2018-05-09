@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import CurrencyInput from 'react-currency-input';
 
 class EnvelopeRow extends React.Component{
     constructor(){
@@ -8,19 +9,20 @@ class EnvelopeRow extends React.Component{
         this.state ={
             budgetedAmount: 0
         }
+        this.handleAmount = this.handleAmount.bind(this)
     }
-    handleAmount(e){
+    handleAmount(e, mask, float){
         let {id, name, type, amount} = this.props
         var envObj ={
             id: id,
-            depAmount: e,
+            depAmount: float,
             name: name,
             type: type,
             oldAmount: amount,
         }
         this.props.totalFn(envObj) 
         this.setState({
-            budgetedAmount: e
+            budgetedAmount: float
         })
     }
     render(){
@@ -32,11 +34,16 @@ class EnvelopeRow extends React.Component{
                     Name:{name}
                     <br/>
                     Type:{type},  
-                    current amount:{+amount}
+                    current amount:${(+amount).toFixed(2)}
                     <br/>
-                    New amount:{+amount + this.state.budgetedAmount}
+                    New amount:${(+amount + this.state.budgetedAmount).toFixed(2)}
                     <br/>
-                    <input type="number" onChange={(e) => this.handleAmount(+e.target.value)}/>
+                    <CurrencyInput 
+                                value={this.state.budgetedAmount} 
+                                placeholder="$0.00"
+                                onChangeEvent={this.handleAmount}
+                                prefix="$"
+                                />
                 </div>
             </div>
         )
