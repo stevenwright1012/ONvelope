@@ -4,3 +4,4 @@ WHERE id = $2;
 
 select * from envelopes
 where user_id = $3
+Order by type

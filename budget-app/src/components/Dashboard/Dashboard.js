@@ -18,7 +18,6 @@ class Dashboard extends Component{
         this.props.getEnvelopes(this.props.user.user_id)
     }
     render(){
-        
         let list = this.props.envelopes.map((enve, i) => {
             let {id, name, type, amount} = enve; 
             return <EnvelopeCard key={i}

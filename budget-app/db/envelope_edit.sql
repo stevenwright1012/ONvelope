@@ -8,3 +8,4 @@ WHERE id = $4;
 
 SELECT * FROM Envelopes
 WHERE user_id = $5
+ORDER BY type

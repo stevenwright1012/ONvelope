@@ -1,4 +1,23 @@
+.login{
+    background: rgb(46, 45, 45);
+    height: 100%;
+    color: white;
+}
+.login a{
+    color: yellow;
+}
+.logo_container{
+    position: relative;
+    width: 20vh;
+    padding-top: 20vh;
+}
 .login_logo{
-    height: 100px;
-    width: 100px;
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+#atribute a{
+    color: red;
 }
