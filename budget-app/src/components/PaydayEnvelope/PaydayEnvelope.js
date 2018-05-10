@@ -44,7 +44,7 @@ class PaydayEnvelope extends React.Component{
                     prefix="$"
                     />
                     <br/>
-                    New amount:${(+amount + this.state.budgetedAmount).toFixed(2)}
+                    New amount:${(+amount + +this.state.budgetedAmount).toFixed(2)}
 
                 </div>
             </div>

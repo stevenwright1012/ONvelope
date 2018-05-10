@@ -78,13 +78,14 @@ class NewPayday extends Component{
         }
     }
     render(){
-        console.log(this.props.payday);
-        
         let subtractor = this.state.depoEnvelopes.reduce((prev, next) => {
             return prev + next.amount
         },0)
         let enevlopeRows = this.props.envelopes.map( (envelope, i) => {
             let {id, name, type, amount} = envelope;
+            if(!type){
+                return null
+            }
             return (
                 <div className="payday_envelope">
                     <PaydayEnvelope
@@ -92,7 +93,7 @@ class NewPayday extends Component{
                     id={id}
                     name={name}
                     type={type}
-                    amount={amount}
+                    amount={+amount}
                     budgetedAmount={+this.props.payday[id]}
                     totalFn={this.calulateTotal}
                     />

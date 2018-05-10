@@ -61,6 +61,9 @@ class PaydayPlan extends Component{
         let editList = this.props.envelopes.map((enve, i) => {
             let {id, name, type} = enve;
             let budgetedAmount = this.props.payday[id]
+            if(!type){
+                return null
+            }
             return (
                 <div>
                     <PaydayForm

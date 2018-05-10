@@ -24,7 +24,8 @@
 }
 .line{
     border: solid #1ab0ae 2px;
-    width: 100%
+    width: 100%;
+    box-sizing: border-box;
 }
 .lists{
     position: absolute;
