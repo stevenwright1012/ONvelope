@@ -3,13 +3,13 @@ import './Login.css'
 
 export default  function Login(){
     const {REACT_APP_LOGIN} = process.env
-    
+
     return (
         <div className='login'>
             <h1>Welcome to <u>ONvelope!</u></h1>
             <div className="logo_container">
                 <a href={REACT_APP_LOGIN}>
-                    <img src="./icons/Onvelope.png" alt="" className="login_logo"/>
+                    <img src="./icons/ONvelope.png" alt="" className="login_logo"/>
                 </a>
             </div>
             <h2>The best way to get <u>ON</u> top of your finances</h2>

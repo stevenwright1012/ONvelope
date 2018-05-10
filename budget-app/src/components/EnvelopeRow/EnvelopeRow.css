@@ -1,0 +1,21 @@
+.envelope_row{
+    border: solid black 2px;   
+    margin: 10px;
+    background: rgb(102, 99, 99);
+    color: #1ab0ae;
+}
+.envelope_name{
+    font-size: 28px; 
+    text-decoration: underline;
+}
+.envelope_row p{
+    text-decoration: underline;
+}
+.envelope_row_input{
+    background: #58d1c1;
+    margin: 5px 0 5px 0; 
+    height: 20px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px; 
+    width: 150px;   
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CurrencyInput from 'react-currency-input';
+import './EnvelopeRow.css'
 
 class EnvelopeRow extends React.Component{
     constructor(){
@@ -27,24 +28,32 @@ class EnvelopeRow extends React.Component{
     }
     render(){
         let {name, type, amount} = this.props
+        let sign = null;
+
+        if(+amount < 0){
+            sign = '-'
+        }
         return (
-            <div className="envelope">
-                <h3>EnvelopeRow</h3>
-                <div>
-                    Name:{name}
+            <div className="envelope_row">
+                    <span className="envelope_name">
+                            {name}
+                    </span>
                     <br/>
-                    Type:{type},  
-                    current amount:${(+amount).toFixed(2)}
+                    <p>
+                        Envelope Type: {type}, 
+                    </p>
+                    <p>
+                        amount: {sign}${Math.abs(+amount).toFixed(2)}
+                    </p>
                     <br/>
-                    New amount:${(+amount + this.state.budgetedAmount).toFixed(2)}
-                    <br/>
-                    <CurrencyInput 
+                    <CurrencyInput className="envelope_row_input"
                                 value={this.state.budgetedAmount} 
                                 placeholder="$0.00"
                                 onChangeEvent={this.handleAmount}
                                 prefix="$"
                                 />
-                </div>
+                    <br/>
+                    After Deposit: {sign}${Math.abs(+amount + this.state.budgetedAmount).toFixed(2)}
             </div>
         )
     }

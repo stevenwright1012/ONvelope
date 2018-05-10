@@ -71,6 +71,9 @@ class AddDeposit extends Component{
         },0)
         let enevlopeRows = this.props.envelopes.map( (envelope, i) => {
             let {id, name, type, amount} = envelope; 
+            if(!type){
+                return null;
+            }
             return (
                 <div>
                     <EnvelopeRow 
@@ -120,7 +123,7 @@ class AddDeposit extends Component{
                         </label>
                         <br/>
                         <p>
-                            Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
+                            Unbudgeted: ${(this.state.amount - subtractor).toFixed(2)}
                         </p>
                         <hr className='depo_line'/>
                     </div>

@@ -34,6 +34,10 @@
     width: 100%
         
 }
+.lists u{
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+}
 .envelope_totals{
     border: solid black 2px;
     background: #58d1c1;

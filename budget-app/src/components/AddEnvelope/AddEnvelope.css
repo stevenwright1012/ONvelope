@@ -17,6 +17,10 @@
 .add_envelope_main h1{
     font-size: 28px;
 }
+.add_envelope_main u{
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+}
 .new_env_input{
     background: #58d1c1;
     margin: 20px 0 20px 0;
