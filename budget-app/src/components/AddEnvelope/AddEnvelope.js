@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav';
 // import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import './AddEnvelope.css'
 
 
 class AddEnvelope extends Component{
@@ -40,21 +41,29 @@ class AddEnvelope extends Component{
     }
     render(){
         return(
-            <div className='main'>
+            <div className='add_envelope_container'>
                 <Nav />
-                <div>
-                    <h1>Add Envelope</h1>
-                    <input type="text" placeholder='Envelope Name' value={this.state.name} onChange={(e) => this.handleName(e.target.value)}/>
+                <div className="add_envelope_main">
+                    <h1>Add New Envelope</h1>
+                    <hr/>
+                    <input className="new_env_input"
+                    type="text" 
+                    placeholder='Enter Name of Envelope...' 
+                    value={this.state.name} 
+                    onChange={(e) => this.handleName(e.target.value)}/>
                     <br/>
-                    <select name="types" value={this.state.type} onChange={(e) => this.handleType(e.target.value)}>
+                    <select className='new_envelope_dropdown'
+                    name="types" value={this.state.type} 
+                    onChange={(e) => this.handleType(e.target.value)}>
                         <option value=''>Select Envelope Type</option>                 
                         <option value="Every day">Everyday spending</option>
-                        <option value="Monthly bill">Monthly bill</option>
+                        <option value="Monthly Bill">Monthly bill</option>
                         <option value="Saving">Saving</option>
                         <option value="Debt">Debt</option>
                     </select>
                     <br/>
-                    <button onClick={() => this.AddNewEnvelope()}>Submit</button>
+                    <button className="new_envelope_submit"
+                    onClick={() => this.AddNewEnvelope()}>Submit</button>
                 </div>
             </div>
         )

@@ -2,13 +2,9 @@
     width: 20vw;
     height: 100%;
     position: fixed;
-    left: 0px;
-    display: block;
-    box-sizing: border-box;
-    align-items: center;
-    font-family: 'Do Hyeon', sans-serif;
-    border-right: black 2px solid;
     background: gainsboro;
+    border-right: 1px solid black;
+    box-sizing: border-box;
 }
 #logo{
     background: rgb(51, 50, 50);
@@ -16,15 +12,21 @@
     padding: 3px 3px 0 2px;
     width: 100%
 }
+#deposit{
+    margin-top: 4px;
+}
 img{
     width: 100%;
-    box-sizing: border-box;
 }
 .nav_button{
     width: 70%;
     border: 0;
-    align-content: center;
-    background: 0;
+    margin-bottom: 4px;
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;    
+}
+.butt_lines{
+    margin: 0;
 }
 .icon{
     display: inline-block;
@@ -41,6 +43,6 @@ a{
     color: black
 }
 #logout{
-    position: relative;
-    bottom: 0;
+    margin-top: 57px;
+    margin-bottom: 0;
 }

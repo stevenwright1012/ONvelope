@@ -1,5 +1,7 @@
-.parent{
+.dash_container{
     height: 100%;
+    position: relative;
+    width: 100%;
 }
 .dash_main{
     position: absolute;
@@ -9,9 +11,27 @@
     width: 80vw;
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
+    height: 100%;
 }
 .dash_main h2{
     color: #ffe261;
+}
+.dash_fixed{
+    position: fixed;
+    width: 80vw;    
+    background: rgb(51, 50, 50);
+    z-index: 2;
+}
+.line{
+    border: solid #1ab0ae 2px;
+    width: 100%
+}
+.lists{
+    position: absolute;
+    top: 110.6px;
+    background: rgb(51, 50, 50);
+    width: 100%
+        
 }
 .envelope_totals{
     border: solid black 2px;
@@ -19,6 +39,15 @@
     color: rgb(51, 50, 50);
     margin: 10px;
 }
-.envelope_totals h4{
+.envelope_totals p{
+    font-size: 18px; 
+}
+.new_envelope_butt{
+    border: 0;
+    border-radius: 15px;
+    height: 30px;;
+    background: #58d1c1;
     margin: 5px;
+    color: rgb(51, 50, 50); 
+    font-family: 'Do Hyeon', sans-serif;    
 }

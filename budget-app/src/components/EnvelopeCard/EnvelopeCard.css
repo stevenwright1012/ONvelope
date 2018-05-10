@@ -1,5 +1,6 @@
 .envelope_card{
     border: solid black 2px;   
     margin: 10px;
-    background: 
+    background: rgb(102, 99, 99);
+    color: #1ab0ae;
 }

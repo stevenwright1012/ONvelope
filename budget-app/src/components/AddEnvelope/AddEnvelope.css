@@ -1,0 +1,43 @@
+.add_envelope_container{
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.add_envelope_main{
+    position: absolute;
+    left: 20vw;
+    height: 100vh;
+    background: rgb(51, 50, 50);
+    color: #58d1c1;
+    width: 80vw;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+}
+.add_envelope_main h1{
+    /* margin-top: 0; */
+}
+.new_env_input{
+    background: #58d1c1;
+    margin: 20px 0 20px 0;
+    height: 40px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px; 
+    width: 230px;   
+}
+.new_envelope_dropdown{
+    background: #58d1c1;
+    margin: 20px 0 20px 0;
+    height: 40px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px; 
+    width: 230px;   
+    border: 0;
+}
+.new_envelope_submit{
+    border: 0;
+    background: 0;
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+    font-size: 40px;
+}
