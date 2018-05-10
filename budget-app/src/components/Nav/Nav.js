@@ -4,6 +4,7 @@ import './Nav.css';
 
 export default  function Nav(){
     const {REACT_APP_LOGOUT} = process.env
+    
     return (
         <div className="nav_bar">
             <Link to='/dashboard'>
