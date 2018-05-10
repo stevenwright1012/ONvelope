@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import './Nav.css';
 
 export default  function Nav(){
+    const {REACT_APP_LOGOUT} = process.env
     return (
         <div className="nav_bar">
             <Link to='/dashboard'>
@@ -49,7 +50,7 @@ export default  function Nav(){
                 Move</button>
             </Link>
             <hr className='butt_lines'/>            
-            <a href="http://localhost:3005/logout">
+            <a href={REACT_APP_LOGOUT}>
                 <button className='nav_button' id='logout'>
                 <img src="./icons/logout.png" alt="" className="icon"/>
                 Logout</button>

@@ -7,12 +7,14 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const con = require('./controller');
 
-const {CONNECTION_URI, SESSION_SECRET, DOMAIN, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL} = process.env
+const {CONNECTION_URI, SESSION_SECRET, DOMAIN, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL, SUCCESS_REDIRECT, FAILURE_REDIRECT} = process.env
 
 massive(CONNECTION_URI).then(db => {
     app.set('db', db)
     
 })
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 const app = express();
 app.use(bodyParser.json());
@@ -58,8 +60,8 @@ passport.deserializeUser( (id, done) => {
 ///// Auth endpoints//////
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/dashboard',
-    failureRedirect: 'http://localhost:3000'
+    successRedirect: SUCCESS_REDIRECT,
+    failureRedirect: FAILURE_REDIRECT
 }))
 app.get('/auth/me', (req, res) => {
     if(req.user){
@@ -88,7 +90,7 @@ app.put('/api/plan', con.changePlan)
 /////Logout//////
 app.get('/logout', (req, res) => {
     req.logOut();
-    res.redirect('http://localhost:3000')
+    res.redirect(FAILURE_REDIRECT)
 })
 
 
