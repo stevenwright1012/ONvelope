@@ -44,7 +44,11 @@ class AddEnvelope extends Component{
             <div className='add_envelope_container'>
                 <Nav />
                 <div className="add_envelope_main">
-                    <h1>Add New Envelope</h1>
+                    <h1>
+                        <u>
+                            Add New Envelope
+                        </u>
+                    </h1>
                     <hr/>
                     <input className="new_env_input"
                     type="text" 

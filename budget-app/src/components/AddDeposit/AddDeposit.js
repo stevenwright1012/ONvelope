@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import EnvelopeRow from '../EnvelopeRow/EnvelopeRow'
 import {addTrans, redirectFalse} from '../../ducks/reducer';
 import CurrencyInput from 'react-currency-input';
+import './AddDeposit.css'
 
 class AddDeposit extends Component{
     constructor(){
@@ -13,6 +14,7 @@ class AddDeposit extends Component{
             amount: 0,
             payer: "",
             status: false,
+            note: '',
             depoEnvelopes: []
         }
     this.calulateTotal = this.calulateTotal.bind(this)
@@ -43,6 +45,11 @@ class AddDeposit extends Component{
             status:false
         })
     }
+    handleNote(e){
+        this.setState({
+            note: e
+        })
+    }
     calulateTotal(obj){
         var filtArr = this.state.depoEnvelopes.filter( env => env.id !== obj.id);
         var newArr = [...filtArr, obj];
@@ -54,7 +61,7 @@ class AddDeposit extends Component{
         for(let i=0; i< this.state.depoEnvelopes.length; i++){
             let obj = this.state.depoEnvelopes[i]
             if(obj.depAmount){
-                this.props.addTrans(this.state.payer, (obj.depAmount*-1), obj.id, this.state.status, null)
+                this.props.addTrans(this.state.payer, (obj.depAmount*-1), obj.id, this.state.status, this.state.note)
             }
         }
     }
@@ -78,30 +85,56 @@ class AddDeposit extends Component{
             )
         })
         return(
-            <div className='main'>
+            <div className='add_deposit_container'>
                 <Nav />
-                <div>
-                    <h1>AddDeposit</h1>
-                    <CurrencyInput 
-                    value={this.state.amount} 
-                    placeholder="How much?"
-                    onChangeEvent={this.handleAmount}
-                    prefix="$"/>
-                    <input type="text" placeholder='From Where?' onChange={(e) => this.handlePayer(e.target.value)}/>
-                    <br/>
-                    <label>
-                        <input type="radio" name='status' onClick={() => this.handleStatusTrue()}/>
-                        Cleared
-                    </label>
-                    <label>
-                        <input type="radio" name='status' onClick={() => this.handleStatusFalse()}/>
-                        Pending
-                    </label>
-                    <br/>
-                    Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
-                    {enevlopeRows}
-                    <br/>
-                    <button onClick={() => this.submitToTrans()}>Send to transactions</button>
+                <div className="add_deposit_main">
+                    <div className="add_deposit_fixed">
+                        <h1>
+                            <u>
+                                Add Deposit
+                            </u>
+                        </h1>
+                        <hr className='depo_line'/>
+                        <CurrencyInput className="depo_input"
+                        value={this.state.amount} 
+                        placeholder="How much?"
+                        onChangeEvent={this.handleAmount}
+                        prefix="$"/>
+                        <input className="depo_input"
+                        type="text" placeholder='From Where?' 
+                        onChange={(e) => this.handlePayer(e.target.value)}/>
+                        <br/>
+                        <label className="depo_radio" id="cleared">
+                            <input
+                            type="radio" 
+                            name='status' 
+                            onClick={() => this.handleStatusTrue()}/>
+                            Cleared
+                        </label>
+                        <label className="depo_radio">
+                            <input
+                            type="radio" 
+                            name='status' 
+                            onClick={() => this.handleStatusFalse()}/>
+                            Pending
+                        </label>
+                        <br/>
+                        <p>
+                            Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
+                        </p>
+                        <hr className='depo_line'/>
+                    </div>
+                    <div className="envelope_rows">
+                        {enevlopeRows}
+                        
+                        <hr className='depo_line'/>                        
+                        <textarea className="depo_note"
+                        cols="20" rows="3" placeholder='Write a short note here if you want' onChange={(e) => this.handleNote(e.target.value)}>
+                        </textarea>
+                        <button className="depo_button"
+                        onClick={() => this.submitToTrans()}>
+                        Send to transactions</button>
+                    </div>
                 </div>
             </div>
         )
