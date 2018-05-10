@@ -18,6 +18,11 @@ class Dashboard extends Component{
         this.props.getEnvelopes(this.props.user.user_id)
     }
     render(){
+        let everyDayArr = this.props.envelopes.filter(enve => enve.type === "Everyday" || enve.type === 'Every day')
+        let monthlyBillArr = this.props.envelopes.filter(enve => enve.type === "Monthly bill")
+        let savingArr = this.props.envelopes.filter(enve => enve.type === "Saving")
+        let debtArr = this.props.envelopes.filter(enve => enve.type === "Debt")        
+        
         let list = this.props.envelopes.map((enve, i) => {
             let {id, name, type, amount} = enve; 
             return <EnvelopeCard key={i}
@@ -27,11 +32,19 @@ class Dashboard extends Component{
                                  amount={amount}/>
         })
         return(
-            <div className='main'>
+            <div className="parent">
                 <Nav />
-                <div>
-                    <h1>Dashboard</h1>
-                    <Balance />
+                <div className='dash_main'>
+                    <div >
+                        <Balance />
+                    </div>
+                    <h2><u>Onvelope Balances:</u></h2>
+                    <div className='envelope_totals'>
+                        <h4>Every Day Total: ${(everyDayArr.reduce((prev, next) => prev + +next.amount, 0)).toFixed(2)}</h4>
+                        <h4>Monthly Bill Total: ${(monthlyBillArr.reduce((prev, next) => prev + +next.amount, 0)).toFixed(2)}</h4>
+                        <h4>Saving Total: ${(savingArr.reduce((prev, next) => prev + +next.amount, 0)).toFixed(2)}</h4>
+                        <h4>Debt Total: ${(debtArr.reduce((prev, next) => prev + +next.amount, 0)).toFixed(2)}</h4>                    
+                    </div>
                     {list}
                     <Link to='/addenvelope'>
                         <button>Add New Envelope</button>

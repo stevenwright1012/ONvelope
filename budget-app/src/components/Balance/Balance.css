@@ -1,4 +1,14 @@
-.card{
-    display: block;
-    border: solid black 1px;
+.balance_card{
+    border: solid black 2px;
+    background: #58d1c1;
+    color: rgb(51, 50, 50);
+    margin: 10px;
+}
+.balance_card h4{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+.balance_card p {
+    font-size: 18px; 
 }

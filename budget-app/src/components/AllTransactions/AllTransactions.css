@@ -1,7 +1,7 @@
 .fixed{
     position: fixed;
     z-index: 2;
-    background: white;
+    background: rgb(46, 45, 45);
     border-bottom: 2px solid black;
 }
 .cards{

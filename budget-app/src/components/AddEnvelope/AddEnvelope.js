@@ -48,10 +48,10 @@ class AddEnvelope extends Component{
                     <br/>
                     <select name="types" value={this.state.type} onChange={(e) => this.handleType(e.target.value)}>
                         <option value=''>Select Envelope Type</option>                 
-                        <option value="Debt">Debt</option>
-                        <option value="Everyday">Everyday spending</option>
+                        <option value="Every day">Everyday spending</option>
                         <option value="Monthly bill">Monthly bill</option>
                         <option value="Saving">Saving</option>
+                        <option value="Debt">Debt</option>
                     </select>
                     <br/>
                     <button onClick={() => this.AddNewEnvelope()}>Submit</button>

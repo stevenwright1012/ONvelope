@@ -1,15 +1,31 @@
 .login{
-    background: rgb(46, 45, 45);
-    height: 100%;
-    color: white;
+    background: rgb(51, 50, 50);
+    height: 100vh;
+    color: #1ab0ae;
+    display: block;
+    align-items: center;
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+}
+.login h1{
+    margin-bottom: 35px;
+    font-size: 55px;
+}
+u{
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
 }
 .login a{
-    color: yellow;
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+    
 }
 .logo_container{
     position: relative;
     width: 20vh;
     padding-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 .login_logo{
     position:  absolute;
@@ -18,6 +34,20 @@
     bottom: 0;
     right: 0;
 }
+#atribute{
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    font-family: sans-serif;
+    color: #58d1c1;
+}
 #atribute a{
-    color: red;
+    color: #1ab0ae;
+    font-family: sans-serif;
+}
+
+@media (min-width: 500px){
+    .login h1{
+        font-size: 80px;
+    }
 }

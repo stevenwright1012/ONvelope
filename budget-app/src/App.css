@@ -1,15 +1,22 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   height: 100%;
 }
+/* html{
+  height: 100%;
+}
+body{
+  height: 100%;
+} */
 .main{
   /* display: flex; */
-  position: absolute;
+  /* position: absolute;
   left: 20vw;
-  background: blue;
+  background: rgb(46, 45, 45);
+  color: white;
   width: 80vw;
-  height: 100%;
-  text-align: center;
-  align-items: center
+  height: 100%; */
+  /* text-align: center; */
+  /* align-items: center */
 }
 

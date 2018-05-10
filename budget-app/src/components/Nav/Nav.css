@@ -1,15 +1,17 @@
 .nav_bar{
     width: 20vw;
-    height: 100vh;
+    height: 100%;
     position: fixed;
     left: 0px;
     display: block;
-    background: gainsboro;
     box-sizing: border-box;
-    align-items: center
+    align-items: center;
+    font-family: 'Do Hyeon', sans-serif;
+    border-right: black 2px solid;
+    background: gainsboro;
 }
 #logo{
-    background: rgb(81, 83, 83);
+    background: rgb(51, 50, 50);
     box-sizing: border-box;
     padding: 3px 3px 0 2px;
     width: 100%
@@ -21,7 +23,8 @@ img{
 .nav_button{
     width: 70%;
     border: 0;
-    align-content: center
+    align-content: center;
+    background: 0;
 }
 .icon{
     display: inline-block;

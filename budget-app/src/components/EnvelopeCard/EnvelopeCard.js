@@ -18,12 +18,16 @@ class EnvelopeCard extends React.Component{
     }
     render(){
         let {name, type, amount} = this.props
+        let sign = null
+        if(+amount < 0){
+            sign = '-'
+        }
         return(
-            <div className="envelope">
+            <div className="envelope_card">
                 Envelope:{name}
                 <br/>
                 Type:{type},  
-                Amount:${(+amount).toFixed(2)}
+                Amount:{sign}${(Math.abs(+amount)).toFixed(2)}
                 {
                 +amount
                 ?

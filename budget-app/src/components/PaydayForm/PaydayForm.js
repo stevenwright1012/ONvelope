@@ -10,7 +10,7 @@ class PaydayForm extends React.Component{
         this.state ={
             plannedAmount: 0
         }
-        this.handleAmount = this.handleAmount.binf(this)
+        this.handleAmount = this.handleAmount.bind(this)
     }
     componentDidMount(){
         this.setState({
@@ -34,7 +34,7 @@ class PaydayForm extends React.Component{
                 <br/>
                 Type:{type},  
                 Amount:<CurrencyInput 
-                        value={this.state.amount} 
+                        value={this.state.plannedAmount} 
                         onChangeEvent={this.handleAmount}
                         prefix="$"
                         />

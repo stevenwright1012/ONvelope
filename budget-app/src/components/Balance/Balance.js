@@ -15,12 +15,16 @@ class Balance extends Component{
                 pending += +transactions[i].trans_amount
             }
         }
+        let sign = null
+        if(pending < 0){
+            sign = '-'
+        }
         return(
-            <div className='card'>
-                <h4>Balance</h4>
+            <div className='balance_card'>
+                <h4>Balance:</h4>
                 <p>Current: ${(+this.props.user.total).toFixed(2)}</p>
-                <p>Pending: ${pending.toFixed(2)}</p>
-                <p>Available:${(+this.props.user.total + pending).toFixed(2)} </p>
+                <p>Pending: {sign}${(Math.abs(pending)).toFixed(2)}</p>
+                <p>Available: ${(+this.props.user.total + pending).toFixed(2)} </p>
             </div>
         )
     }
