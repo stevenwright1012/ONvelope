@@ -14,10 +14,11 @@ massive(CONNECTION_URI).then(db => {
     
 })
 
-app.use( express.static( `${__dirname}/../build` ) );
 
 const app = express();
 app.use(bodyParser.json());
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(session({
     secret: SESSION_SECRET,
