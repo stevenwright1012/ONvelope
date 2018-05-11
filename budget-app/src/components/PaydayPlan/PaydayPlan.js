@@ -52,6 +52,7 @@ class PaydayPlan extends Component{
             alert("Every penny must be budgeted before you can save your new plan")
             return null;
         }
+        this.refs.btn.setAttribute("disabled", "disabled");
         const {envelopePlans} = this.state
         let newPlan = {};
         for(let i = 0; i < envelopePlans.length; i ++){
@@ -107,7 +108,7 @@ class PaydayPlan extends Component{
                     </div>
                     <div className="plan_envelopes">
                         {editList}
-                        <button className ="depo_button"
+                        <button className ="depo_button" ref="btn"
                         onClick={() => this.submit(subtractor)}>Save Payday Plan</button>             
                     </div>
                 </div>

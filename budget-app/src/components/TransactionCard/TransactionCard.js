@@ -75,7 +75,12 @@ class TransactionCard extends React.Component{
             note: e
         })
     }
+    delete(id, amount, envelope, status){
+        this.refs.btn.setAttribute("disabled", "disabled");  
+        this.props.deleteTrans(id, amount, envelope, status)
+    }
     saveChanges(){
+        this.refs.btn.setAttribute("disabled", "disabled");  
         const {payee, amountOG, amountNew, envelopeOG, envelopeNew, statusOG, statusNew, note} = this.state
         axios.put('/api/edit', {
             trans_id: this.props.id,
@@ -152,8 +157,8 @@ class TransactionCard extends React.Component{
                             &nbsp;{note}
                         </p>
                         <div className='trans_card_butts'>
-                            <button  className="trans_card_button"
-                            onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
+                            <button  ref="btn" className="trans_card_button"
+                            onClick={() => this.delete(id, amount, envelope, status)}>Delete</button>
                             <button className="trans_card_button"
                             onClick={() => this.handleEdit()}>Edit</button>
                         </div>
@@ -197,7 +202,7 @@ class TransactionCard extends React.Component{
                             </textarea>
                         </p>
                         <div className='trans_card_butts'>
-                            <button className="trans_card_button"
+                            <button className="trans_card_button" ref="btn"
                             onClick={() => this.saveChanges()}>Save Changes</button>
                             <button className="trans_card_button"
                             onClick={() => this.handleCancel()}>Cancel</button>

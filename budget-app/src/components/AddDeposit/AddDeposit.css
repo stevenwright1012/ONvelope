@@ -73,3 +73,6 @@
     color: rgb(51, 50, 50); 
     font-family: 'Do Hyeon', sans-serif;   
 }
+.depo_button:disabled{
+    background: red;
+}

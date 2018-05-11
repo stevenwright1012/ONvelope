@@ -60,13 +60,13 @@ class NewPayday extends Component{
             return prev + next.amount
         },0)
         if(this.state.amount - subtractor === 0){
+            this.refs.btn.setAttribute("disabled", "disabled");
             for(let i=0; i< this.state.depoEnvelopes.length; i++){
                 let obj = this.state.depoEnvelopes[i]
                 if(obj.amount){
-                    this.props.addTrans(`${month}/${day}/${year}`, (obj.amount*-1), obj.id, true, `Paycheck submited ${month}/${day}/${year}`)
+                    this.props.addTrans(`Paycheck ${month}/${day}/${year}`, (obj.amount*-1), obj.id, true, `Paycheck submited on ${month}/${day}/${year}`)
                 }
             }
-            // setTimeout(() => {this.props.history.push('/transactions')}, 3000)
         }
         else{
             alert("Every dollar must be assigned to an envelope before you can submit")
@@ -128,7 +128,7 @@ class NewPayday extends Component{
                     <div className='payday_cards'>
                         {enevlopeRows}
                         <br/>
-                        <button className="depo_button"
+                        <button className="depo_button" ref="btn"
                         onClick={() => this.submitToTrans()}>Send To Transactions</button>
                     </div>
                 </div>

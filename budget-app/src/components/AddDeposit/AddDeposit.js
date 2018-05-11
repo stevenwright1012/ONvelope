@@ -72,6 +72,7 @@ class AddDeposit extends Component{
             alert("Every Penny must be budgeted before you can add this deposit to your transactions")
             return null
         }
+        this.refs.btn.setAttribute("disabled", "disabled");        
         for(let i=0; i< this.state.depoEnvelopes.length; i++){
             let obj = this.state.depoEnvelopes[i]
             if(obj.depAmount){
@@ -149,6 +150,7 @@ class AddDeposit extends Component{
                         cols="20" rows="3" placeholder='Write a short note here if you want' onChange={(e) => this.handleNote(e.target.value)}>
                         </textarea>
                         <button className="depo_button"
+                        ref="btn"
                         onClick={() => this.submitToTrans(subtractor)}>
                         Send to Transactions</button>
                     </div>

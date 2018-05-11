@@ -8,7 +8,9 @@ class EnvelopeRow extends React.Component{
         super()
 
         this.state ={
-            budgetedAmount: 0
+            budgetedAmount: 0,
+            displayAmount: 0,
+            timeout: null
         }
         this.handleAmount = this.handleAmount.bind(this)
     }
@@ -21,9 +23,17 @@ class EnvelopeRow extends React.Component{
             type: type,
             oldAmount: amount,
         }
-        this.props.totalFn(envObj) 
         this.setState({
-            budgetedAmount: float
+            displayAmount: float
+        })
+        clearTimeout(this.state.timeout)
+        this.setState({
+            timeout: setTimeout(() => {
+                this.props.totalFn(envObj) 
+                this.setState({
+                    budgetedAmount: float
+                })
+            }, 1200)
         })
     }
     render(){
@@ -52,7 +62,7 @@ class EnvelopeRow extends React.Component{
                         : {sign}${Math.abs(+amount).toFixed(2)}
                     </p>
                     <CurrencyInput className="envelope_row_input"
-                                value={this.state.budgetedAmount} 
+                                value={this.state.displayAmount} 
                                 placeholder="$0.00"
                                 onChangeEvent={this.handleAmount}
                                 prefix="$"

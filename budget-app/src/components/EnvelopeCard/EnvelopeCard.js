@@ -11,6 +11,7 @@ class EnvelopeCard extends React.Component{
             alert("An Envelope must be empty before it can be deleted")
         }
         else{
+            this.refs.btn.setAttribute("disabled", "disabled");  
             axios.delete(`/api/envdelete/${id}`).then(res => {
                 
             })
@@ -38,7 +39,7 @@ class EnvelopeCard extends React.Component{
                 ?
                 null
                 :
-                <button className="envelope_delete_button"
+                <button className="envelope_delete_button" ref="btn"
                 onClick={() => this.deleteEnvelope()}>Delete Envelope</button>
                 }
             </div>

@@ -54,8 +54,8 @@ class AddTransaction extends Component{
         if(!envelope || !amount || !payee){
             return alert("Please complete form")
         }
-
-
+        this.refs.btn.setAttribute("disabled", "disabled");  
+        
         this.props.addTrans(payee, amount, envelope, status, note)
         this.props.history.push('/transactions')
     }
@@ -117,7 +117,7 @@ class AddTransaction extends Component{
                     onChange={(e) => this.handleNote(e.target.value)}>
                     </textarea>
                     <br/>
-                    <button className="trans_submit"
+                    <button className="trans_submit" ref="btn"
                     onClick={() => this.submitTransaction()}>
                     Submit</button>         
                 </div>

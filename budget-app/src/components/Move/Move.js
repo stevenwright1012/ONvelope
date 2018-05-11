@@ -34,6 +34,7 @@ class Move extends Component{
     }
     submit(){
         if(this.state.amount){
+            this.refs.btn.setAttribute("disabled", "disabled");
             axios.put('/api/move', {fromId:this.state.from,
                                     toId: this.state.to,
                                     amount: this.state.amount}).then( res => {
@@ -90,7 +91,7 @@ class Move extends Component{
                                 onChangeEvent={this.handleAmount}
                                 prefix="$"
                                 />
-                            <button className="new_envelope_submit"
+                            <button className="new_envelope_submit" ref="btn"
                             onClick={() => this.submit()}>Submit</button>
                         </div>
                         :
