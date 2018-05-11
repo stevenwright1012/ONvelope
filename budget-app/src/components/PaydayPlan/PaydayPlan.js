@@ -84,6 +84,11 @@ class PaydayPlan extends Component{
         let subtractor = this.state.envelopePlans.reduce((prev, next) => {
             return prev + next.plannedAmount
         },0)
+        
+        let sign = null
+        if((+this.state.typicalPay - subtractor) < 0){
+            sign = '-'
+        }
         return(
             <div className='plan_container'>
                 <Nav />
@@ -97,7 +102,7 @@ class PaydayPlan extends Component{
                                         prefix="$"
                                         />
                         <br/>
-                        Unbudgeted: {this.state.typicalPay - subtractor} 
+                        Unbudgeted: {sign}${Math.abs(this.state.typicalPay - subtractor).toFixed(2)} 
                     <hr className='line'/>
                     </div>
                     <div className="plan_envelopes">

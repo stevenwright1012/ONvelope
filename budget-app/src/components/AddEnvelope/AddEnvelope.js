@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav';
 // import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {changePlan} from '../../ducks/reducer'
 import './AddEnvelope.css'
 
 
@@ -25,6 +26,10 @@ class AddEnvelope extends Component{
                 name: this.state.name,
                 type: this.state.type
             }).then(res => {
+                let eId = res.data[0].id
+                let newPlan = Object.assign(this.props.payday, {[eId]:0} )
+
+                this.props.changePlan(newPlan)
                 this.props.history.push('/dashboard')
             })
         }
@@ -76,8 +81,9 @@ class AddEnvelope extends Component{
 
 function mapStateToProps(state){
     return{
-        user: state.user
+        user: state.user,
+        payday: state.payday
     }
 }
 
-export default connect(mapStateToProps)(AddEnvelope);
+export default connect(mapStateToProps, {changePlan})(AddEnvelope);

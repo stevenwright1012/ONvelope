@@ -99,7 +99,12 @@ class NewPayday extends Component{
                     />
                 </div>
             )
-        })      
+        }) 
+        
+        let sign = null
+        if((+this.state.typicalPay - subtractor) < 0){
+            sign = '-'
+        }     
         return(
             <div className='payday_container'>
                 <Nav />
@@ -117,7 +122,7 @@ class NewPayday extends Component{
                                 />
                         </label>
                         <br/>
-                        Unbudgeted: ${(this.state.amount - subtractor).toFixed(2)}
+                        Unbudgeted: {sign}${Math.abs(this.state.amount - subtractor).toFixed(2)}
                         <hr className='line'/>
                     </div>
                     <div className='payday_cards'>

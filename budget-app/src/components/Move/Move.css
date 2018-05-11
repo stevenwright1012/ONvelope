@@ -1,0 +1,30 @@
+.move_container{
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.move_main{
+    position: absolute;
+    left: 20vw;
+    background: rgb(51, 50, 50);
+    color: #58d1c1;
+    width: 80vw;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+    height: 100%;
+}
+.move_main h1{
+    color: #ffe261;
+    font-family: 'Permanent Marker', cursive;
+    text-decoration: underline;
+}
+.move_dropdown{
+    background: #58d1c1;
+    margin: 20px 0 20px 0;
+    height: 40px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 20px; 
+    width: 150px;   
+    border: 0;
+    border-radius: 5px;
+}

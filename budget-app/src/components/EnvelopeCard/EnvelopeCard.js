@@ -12,7 +12,7 @@ class EnvelopeCard extends React.Component{
         }
         else{
             axios.delete(`/api/envdelete/${id}`).then(res => {
-
+                
             })
         }
     }
