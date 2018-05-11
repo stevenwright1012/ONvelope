@@ -1,15 +1,53 @@
-.fixed{
+.all_trans_container{
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.all_trans_main{
+    position: absolute;
+    left: 20vw;
+    height: 100vh ;
+    background: rgb(51, 50, 50);
+    /* color: #58d1c1; */
+    width: 80vw;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+}
+.all_trans_fixed{
     position: fixed;
+    width: 80vw;    
+    background: rgb(51, 50, 50);
     z-index: 2;
-    background: rgb(46, 45, 45);
-    border-bottom: 2px solid black;
+    border-bottom: solid 2px #58d1c1;
+}
+.all_trans_fixed u{
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+    font-size: 30px;
+}
+.trans_button{
+    border:0;
+    border-radius: 5px;
+    margin: 0 3px 0 3px;
+    height:15px;
+    width: 75px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 14px;
+}
+#all{
+    background: #58d1c1;
+}
+.depo{
+    background: rgb(106, 204, 106);
+    margin-bottom: 6px;
+}
+.trans{
+   background: rgb(238, 117, 118);
 }
 .cards{
     position: relative;
-    top: 197px;
+    top: 209px;
     z-index: 1;
-    align-items: center
-}
-.content{
-    justify-content: center;
+    align-items: center;
+    background: rgb(51, 50, 50);
 }

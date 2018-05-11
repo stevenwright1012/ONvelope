@@ -89,7 +89,10 @@ class TransactionCard extends React.Component{
             note: note
         }).then(res => {
             this.props.editTrans(res.data)
-            window.location.reload()
+            window.location.reload();
+            this.setState({
+                edit: false,
+            })
         })
     }
     render(){
@@ -103,6 +106,11 @@ class TransactionCard extends React.Component{
         else{
             pending = "Pending"
         }
+        var source = ''
+        if(amount<0){
+            source = 'Payee'
+        }
+        else{ source = 'Source'}
 
         var userEnvelopes = null;
         if(this.props.envelopes){
@@ -116,38 +124,63 @@ class TransactionCard extends React.Component{
                 {
                     !this.state.edit
                 ?
-                    <div id={this.props.styles}>
-                        payee: {payee}
-                        <p>amount:${(+amount).toFixed(2)}</p>
+                    <div id={this.props.styles} className="tran_content">
+                        <h4>
+                            {payee}
+                        </h4>
                         <p>
-                        envelope:{name}
+                            <u>
+                                Amount: 
+                            </u>
+                            &nbsp;${(+amount).toFixed(2)}</p>
+                        <p>
+                            <u>
+                                Envelope:
+                            </u>
+                            &nbsp;{name}
                         </p>
                         <p>
-                        {pending}
+                            <u>
+                                Status: 
+                            </u>
+                            &nbsp;{pending}
                         </p>
                         <p>
-                        note:{note}
+                            <u>
+                                Note: 
+                            </u>
+                            &nbsp;{note}
                         </p>
-                        <button onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
-                        <button onClick={() => this.handleEdit()}>Edit</button>
+                        <div className='trans_card_butts'>
+                            <button  className="trans_card_button"
+                            onClick={() => this.props.deleteTrans(id, amount, envelope, status)}>Delete</button>
+                            <button className="trans_card_button"
+                            onClick={() => this.handleEdit()}>Edit</button>
+                        </div>
                     </div>
                 :
                 <div id={this.props.styles}>
-                        payee: <input type="text" value={this.state.payee} onChange={(e) => this.handlePayee(e.target.value)}/>
-                        <p>amount:<CurrencyInput 
+                    <p>
+                        {source}: <input className="trans_card_input"
+                        type="text" value={this.state.payee} onChange={(e) => this.handlePayee(e.target.value)}/>
+                    </p>
+                        <p>Amount: <CurrencyInput className="trans_card_input"
                                     value={this.state.amountNew} 
                                     onChangeEvent={this.handleAmount}
                                     prefix="$"
                                     /></p>
                         <p>
-                        envelope:
-                        <select name="envelopes" value={this.state.envelopeNew} onChange={(e) => this.handleEnvelopeNew(e.target.value)}>
+                        Envelope: 
+                        <select className="trans_card_dropdown"
+                        name="envelopes" 
+                        value={this.state.envelopeNew} 
+                        onChange={(e) => this.handleEnvelopeNew(e.target.value)}>
                             <option value={this.state.envelopeOG}>{name}</option>
                             {userEnvelopes}
                         </select>
                         </p>
-                        <p>
-                            <label>
+                        <p className="trans_card_radio">
+                            <label >
                                 <input type="radio" name='status' onClick={() => this.handleStatusTrue()}/>
                                 Cleared
                             </label>
@@ -156,12 +189,19 @@ class TransactionCard extends React.Component{
                                 Pending
                             </label>
                         </p>
-                        <p>
-                            note: <textarea cols="20" rows="3" value={this.state.note} onChange={(e) => this.handleNote(e.target.value)}>
+                        <p className="trans_card_note_container">
+                            <textarea  className="trans_card_note"
+                            cols="20" rows="2"  
+                            value={this.state.note} 
+                            onChange={(e) => this.handleNote(e.target.value)}>
                             </textarea>
                         </p>
-                        <button onClick={() => this.saveChanges()}>Save Changes</button>
-                        <button onClick={() => this.handleCancel()}>Cancel</button>
+                        <div className='trans_card_butts'>
+                            <button className="trans_card_button"
+                            onClick={() => this.saveChanges()}>Save Changes</button>
+                            <button className="trans_card_button"
+                            onClick={() => this.handleCancel()}>Cancel</button>
+                        </div>
                     </div>
                 }
             </div>

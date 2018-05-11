@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from '../Nav/Nav';
 import {connect} from 'react-redux';
 import EnvelopeRow from '../EnvelopeRow/EnvelopeRow'
-import {addTrans, redirectFalse} from '../../ducks/reducer';
+import {addTrans, redirectFalse, getUser, getTransactions, getEnvelopes} from '../../ducks/reducer';
 import CurrencyInput from 'react-currency-input';
 import './AddDeposit.css'
 
@@ -20,10 +20,16 @@ class AddDeposit extends Component{
     this.calulateTotal = this.calulateTotal.bind(this)
     this.handleAmount = this.handleAmount.bind(this)
     }
+    componentDidMount(){
+        this.props.getUser();
+        window.scrollTo(0, 0);
+    }
     componentDidUpdate(){
         if(this.props.redirect){
             setTimeout(()=>{ this.props.history.push('/transactions') }, 1000)
         }
+        this.props.getTransactions(this.props.user.user_id);
+        this.props.getEnvelopes(this.props.user.user_id);
     }
     handleAmount(e, mask, float){
         this.setState({
@@ -57,7 +63,15 @@ class AddDeposit extends Component{
             depoEnvelopes: newArr,
         })
     }
-    submitToTrans(){
+    submitToTrans(sub){
+        if(!this.state.amount || !this.state.payer){
+            alert("Please complete form")
+            return null;
+        }
+        if((this.state.amount - sub) !== 0){
+            alert("Every Penny must be budgeted before you can add this deposit to your transactions")
+            return null
+        }
         for(let i=0; i< this.state.depoEnvelopes.length; i++){
             let obj = this.state.depoEnvelopes[i]
             if(obj.depAmount){
@@ -135,8 +149,8 @@ class AddDeposit extends Component{
                         cols="20" rows="3" placeholder='Write a short note here if you want' onChange={(e) => this.handleNote(e.target.value)}>
                         </textarea>
                         <button className="depo_button"
-                        onClick={() => this.submitToTrans()}>
-                        Send to transactions</button>
+                        onClick={() => this.submitToTrans(subtractor)}>
+                        Send to Transactions</button>
                     </div>
                 </div>
             </div>
@@ -146,9 +160,10 @@ class AddDeposit extends Component{
 
 function mapStateToProps(state){
     return {
+        user: state.user,
         envelopes: state.envelopes,
         redirect: state.redirect
     }
 }
 
-export default connect(mapStateToProps, {addTrans, redirectFalse})(AddDeposit);
+export default connect(mapStateToProps, {addTrans, redirectFalse, getUser, getTransactions, getEnvelopes})(AddDeposit);

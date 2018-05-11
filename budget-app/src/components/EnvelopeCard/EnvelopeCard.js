@@ -24,10 +24,10 @@ class EnvelopeCard extends React.Component{
         }
         return(
             <div className="envelope_card">
-                Envelope:{name}
+                Envelope: {name}
                 <br/>
-                Type:{type},  
-                Amount:{sign}${(Math.abs(+amount)).toFixed(2)}
+                Type: {type},  
+                Amount: {sign}${(Math.abs(+amount)).toFixed(2)}
                 {
                 +amount
                 ?

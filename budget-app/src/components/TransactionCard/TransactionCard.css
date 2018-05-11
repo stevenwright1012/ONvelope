@@ -1,5 +1,67 @@
 .tran_card{
     border: solid black 2px;
+    margin: 10px;
+    text-align: left;
+    color: rgb(51, 50, 50);
+}
+.tran_card h4{
+    margin: 0;
+    text-align: center;
+    text-decoration: underline;
+}
+.tran_content p{
+    margin-left: 10px;
+}
+.trans_card_butts{
+ text-align: center;
+}
+.trans_card_button{
+    border: 0;
+    border-radius: 5px;
+    width: 90px;
+    margin: 4px;
+    background: rgb(51, 50, 50);
+    color: #58d1c1;
+    font-family: 'Do Hyeon', sans-serif;
+}
+.trans_card_input{
+    background: #58d1c1;
+    color: rgb(51, 50, 50);
+    margin: 5px 0 5px 0;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px; 
+    width: 150px;
+}
+.trans_card_dropdown{
+    background: #58d1c1;
+    margin: 5px 0 5px 0;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px; 
+    width: 150px;   
+    border: 0;
+    border-radius: 5px;
+}
+.trans_card_radio{
+    text-align: center;
+    font-size: 16px;
+}
+.note_tex{
+    display: inline-block
+}
+.trans_card_note_container{
+    text-align: center;
+    display: inline-block;
+    width: 100%
+}
+.trans_card_note{
+    margin-top: 5px;
+    color: rgb(51, 50, 50);
+    background: #58d1c1;
+    text-decoration: rgb(51, 50, 50);
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px;
+    width: 150px;
+    border-radius: 5px;
 }
 #pos{
     background: rgb(106, 204, 106)

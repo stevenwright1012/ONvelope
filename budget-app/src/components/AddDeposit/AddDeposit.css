@@ -8,7 +8,7 @@
     left: 20vw;
     height: 100vh;
     background: rgb(51, 50, 50);
-    color: #58d1c1;
+    /* color: #58d1c1; */
     width: 80vw;
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
@@ -21,6 +21,7 @@
 }
 .add_deposit_fixed p{
     font-size: 20px;
+    color: #58d1c1;
 }
 .add_deposit_fixed u{
     font-family: 'Permanent Marker', cursive;
@@ -36,6 +37,7 @@
 }
 .depo_radio{
     font-size: 20px;
+    color: #58d1c1
 }
 #cleared{
     margin-right: 10px;
@@ -53,6 +55,14 @@
 }
 .depo_note{
     margin-top: 5px;
+    color: rgb(51, 50, 50);
+    background: #58d1c1;
+    text-decoration: rgb(51, 50, 50);
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 16px;
+    width: 230px;
+    border-radius: 5px;
+    
 }
 .depo_button{
     border: 0;

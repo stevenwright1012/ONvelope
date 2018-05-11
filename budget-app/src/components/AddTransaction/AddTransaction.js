@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav'
 import {connect} from 'react-redux';
 import {addTrans} from '../../ducks/reducer';
 import CurrencyInput from 'react-currency-input';
+import './AddTransaction.css'
 
 class AddTransaction extends Component{
     constructor(){
@@ -50,8 +51,8 @@ class AddTransaction extends Component{
     }
     submitTransaction(){
         const { payee, amount, envelope, status, note} = this.state;
-        if(!envelope){
-            return alert("please select an envelope")
+        if(!envelope || !amount || !payee){
+            return alert("Please complete form")
         }
 
 
@@ -66,37 +67,57 @@ class AddTransaction extends Component{
             })
         }
         return(
-            <div className='main'>
+            <div className='add_trans_container'>
                 <Nav />
-                <div>
-                    <h1>AddTransaction</h1>
-                    <input type="text" placeholder='Payee' onChange={(e) => this.handlePayee(e.target.value)}/>
+                <div className="add_trans_main">
+                    <h1>
+                        <u>
+                            Add Transaction
+                        </u>
+                    </h1>
+                    <hr className='depo_line'/>
+                    <input className="add_trans_input"
+                    type="text" 
+                    placeholder='Payee' 
+                    onChange={(e) => this.handlePayee(e.target.value)}/>
                     <br/>
-                    <CurrencyInput 
+                    <CurrencyInput className="add_trans_input"
                         value={this.state.amount} 
                         placeholder="Amount"
                         onChangeEvent={this.handleAmount}
                         prefix="$"
                         />
                     <br/>
-                    <select name="envelopes" value={this.state.envelope} onChange={(e) => this.handleEnvelope(e.target.value)}>
+                    <select className="add_trans_dropdown"
+                    name="envelopes" 
+                    value={this.state.envelope} 
+                    onChange={(e) => this.handleEnvelope(e.target.value)}>
                         <option value="">Select Envelope</option>
                         {userEnvelopes}
                     </select>
                     <br/>
-                    <label>
-                        <input type="radio" name='status' onClick={() => this.handleStatusTrue()}/>
+                    <label className="trans_radio">
+                        <input className="trans_radio"
+                        type="radio" 
+                        name='status' 
+                        onClick={() => this.handleStatusTrue()}/>
                         Cleared
                     </label>
-                    <label>
-                        <input type="radio" name='status' onClick={() => this.handleStatusFalse()}/>
+                    <label className="trans_radio">
+                        <input className="trans_radio"
+                        type="radio" 
+                        name='status' 
+                        onClick={() => this.handleStatusFalse()}/>
                         Pending
                     </label>
                     <br/>
-                    <textarea cols="20" rows="3" placeholder='Write a short note here if you want' onChange={(e) => this.handleNote(e.target.value)}>
+                    <textarea className="trans_note"
+                    cols="20" rows="3" 
+                    placeholder='Write a short note here if you want' 
+                    onChange={(e) => this.handleNote(e.target.value)}>
                     </textarea>
                     <br/>
-                    <button 
+                    <button className="trans_submit"
                     onClick={() => this.submitTransaction()}>
                     Submit</button>         
                 </div>

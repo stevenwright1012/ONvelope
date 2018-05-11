@@ -40,12 +40,11 @@ class EnvelopeRow extends React.Component{
                     </span>
                     <br/>
                     <p>
-                        Envelope Type: {type}, 
+                        Type: {type}, 
                     </p>
                     <p>
-                        amount: {sign}${Math.abs(+amount).toFixed(2)}
+                        Amount: {sign}${Math.abs(+amount).toFixed(2)}
                     </p>
-                    <br/>
                     <CurrencyInput className="envelope_row_input"
                                 value={this.state.budgetedAmount} 
                                 placeholder="$0.00"
@@ -53,7 +52,9 @@ class EnvelopeRow extends React.Component{
                                 prefix="$"
                                 />
                     <br/>
-                    After Deposit: {sign}${Math.abs(+amount + this.state.budgetedAmount).toFixed(2)}
+                    <p>
+                        After Deposit: {sign}${Math.abs(+amount + this.state.budgetedAmount).toFixed(2)}
+                    </p>
             </div>
         )
     }

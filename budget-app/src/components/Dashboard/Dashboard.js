@@ -12,6 +12,7 @@ class Dashboard extends Component{
     componentDidMount(){
         this.props.getUser();
         this.props.redirectFalse();
+        window.scrollTo(0, 0);
     }
     componentDidUpdate(){
         this.props.getTransactions(this.props.user.user_id);

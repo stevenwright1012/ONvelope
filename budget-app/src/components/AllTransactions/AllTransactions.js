@@ -12,17 +12,22 @@ class AllTransactions extends Component{
         super()
 
         this.state ={
-            filteredList:[]
+            filteredList:[],
+            refresh: false
         }
-    
+        this.handleRefresh = this.handleRefresh.bind(this)
     }
     componentDidMount(){
-        this.props.getTransactions(this.props.user.user_id);
+        window.scrollTo(0, 0);
         this.props.getUser()
         this.props.redirectFalse()
+        this.props.getTransactions(this.props.user.user_id);        
         this.setState({
             filteredList: this.props.transactions,
         })
+    }    
+    componentDidUpdate(){
+            this.props.getTransactions(this.props.user.user_id);
     }
     componentWillReceiveProps(next){
         if(this.state.filteredList.length !== next.transactions.length){
@@ -31,7 +36,11 @@ class AllTransactions extends Component{
             })
         }
     }
-
+    handleRefresh(){
+        this.setState({
+            refresh:true
+        })
+    }
     updateFilteredList(str){
         let newList=[];
         switch (str) {
@@ -131,7 +140,8 @@ class AllTransactions extends Component{
                     name={tran.name}
                     note={tran.note}
                     status={tran.status}
-                    styles='pos'/>
+                    styles='pos'
+                    refreshFn={this.handleRefresh}/>
                 )
             }
             else{
@@ -144,24 +154,33 @@ class AllTransactions extends Component{
                     name={tran.name}
                     note={tran.note}
                     status={tran.status}
-                    styles='neg'/>
+                    styles='neg'
+                    refreshFn={this.handleRefresh}/>
                 )
             }
         })
         return(
-            <div className='main'>
+            <div className='all_trans_container'>
                 <Nav />
-                <div className ="Content">
-                    <div className="fixed">
-                        <h1>All Transactions</h1>
+                <div className ="all_trans_main">
+                    <div className="all_trans_fixed">
+                        <h1>
+                            <u>
+                                All Transactions
+                            </u>
+                        </h1>
+                        <hr className='depo_line'/>
                         <Balance />
-                        <button onClick={() => this.updateFilteredList('ALL')}>All</button>                    
-                        <button onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
-                        <button onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
-                        <button onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>                    
-                        <button onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
-                        <button onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
-                        <button onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>                    
+                        {/* <button className="trans_button" id='all'
+                        onClick={() => this.updateFilteredList('ALL')}>All</button>    
+                        <br/>                
+                        <button className="trans_button depo" onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
+                        <button className="trans_button depo" onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
+                        <button className="trans_button depo" onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>    
+                        <br/>                
+                        <button className="trans_button trans" onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
+                        <button className="trans_button trans" onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
+                        <button className="trans_button trans" onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>             */}
                     </div>
                     <div className="cards">
                         {cards}

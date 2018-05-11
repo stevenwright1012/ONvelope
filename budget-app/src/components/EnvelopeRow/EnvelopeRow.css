@@ -7,9 +7,11 @@
 .envelope_name{
     font-size: 28px; 
     text-decoration: underline;
+    color: #ffe261;
 }
 .envelope_row p{
     text-decoration: underline;
+    font-size: 18px;
 }
 .envelope_row_input{
     background: #58d1c1;
