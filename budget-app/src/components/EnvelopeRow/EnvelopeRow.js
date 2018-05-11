@@ -23,11 +23,9 @@ class EnvelopeRow extends React.Component{
             type: type,
             oldAmount: amount,
         }
-        this.setState({
-            displayAmount: float
-        })
         clearTimeout(this.state.timeout)
         this.setState({
+            displayAmount: float,
             timeout: setTimeout(() => {
                 this.props.totalFn(envObj) 
                 this.setState({
