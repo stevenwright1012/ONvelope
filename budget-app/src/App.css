@@ -4,4 +4,7 @@
   width: 100%;
   position: relative;
 }
-
+input{
+  border: 0;
+  border-radius: 5px;
+}

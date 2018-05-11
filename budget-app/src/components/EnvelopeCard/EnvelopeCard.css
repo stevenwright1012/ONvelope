@@ -4,3 +4,16 @@
     background: rgb(102, 99, 99);
     color: #1ab0ae;
 }
+.envelope_card h4{
+    margin: 0;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #ffe261;
+}
+.envelope_delete_button{
+    border: 0;
+    border-radius: 5px;
+    background: #58d1c1;
+    margin-bottom: 3px;
+    font-family: 'Do Hyeon', sans-serif;
+}

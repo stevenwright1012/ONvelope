@@ -10,7 +10,7 @@
     color: #ffe261;
 }
 .envelope_row p{
-    text-decoration: underline;
+    /* text-decoration: underline; */
     font-size: 18px;
 }
 .envelope_row_input{

@@ -29,11 +29,18 @@ class PaydayForm extends React.Component{
     render(){
         let {name, type} = this.props
         return(
-            <div className="envelope">
-                Name:{name}
+            <div className="envelope_row">
+                <span className="envelope_name">
+                        {name}
+                </span>
                 <br/>
-                Type:{type},  
-                Amount:<CurrencyInput 
+                <p>
+                    <u>
+                        Type
+                    </u>
+                    : {type}, 
+                </p>
+                Amount: <CurrencyInput className="payday_input"
                         value={this.state.plannedAmount} 
                         onChangeEvent={this.handleAmount}
                         prefix="$"

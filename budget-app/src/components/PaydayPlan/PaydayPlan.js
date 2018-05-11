@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import PaydayForm from '../PaydayForm/PaydayForm';
 import {changePlan} from '../../ducks/reducer';
 import CurrencyInput from 'react-currency-input';
+import './PaydayPlan.css'
 
 class PaydayPlan extends Component{
     constructor(){
@@ -46,7 +47,11 @@ class PaydayPlan extends Component{
             envelopePlans: newArr
         })
     }
-    submit(){
+    submit(sub){
+        if(this.state.typical - sub){
+            alert("Every penny must be budgeted before you can save your new plan")
+            return null;
+        }
         const {envelopePlans} = this.state
         let newPlan = {};
         for(let i = 0; i < envelopePlans.length; i ++){
@@ -80,19 +85,26 @@ class PaydayPlan extends Component{
             return prev + next.plannedAmount
         },0)
         return(
-            <div className='main'>
+            <div className='plan_container'>
                 <Nav />
-                <div>
-                    <h1>Payday  Plan</h1>
-                    Typical Payday:<CurrencyInput 
-                                    value={this.state.typicalPay} 
-                                    onChangeEvent={this.handlePay}
-                                    prefix="$"
-                                    />
-                    <br/>
-                    Unbudgeted: {this.state.typicalPay - subtractor} 
-                    {editList}
-                    <button onClick={() => this.submit()}>Save new Payday Plan</button>             
+                <div className="plan_main">
+                    <div className="plan_fixed">
+                        <h1>Payday  Plan</h1>
+                        <hr className='line'/>
+                        Typical Payday:<CurrencyInput className="payday_input"
+                                        value={this.state.typicalPay} 
+                                        onChangeEvent={this.handlePay}
+                                        prefix="$"
+                                        />
+                        <br/>
+                        Unbudgeted: {this.state.typicalPay - subtractor} 
+                    <hr className='line'/>
+                    </div>
+                    <div className="plan_envelopes">
+                        {editList}
+                        <button className ="depo_button"
+                        onClick={() => this.submit(subtractor)}>Save Payday Plan</button>             
+                    </div>
                 </div>
             </div>
         )

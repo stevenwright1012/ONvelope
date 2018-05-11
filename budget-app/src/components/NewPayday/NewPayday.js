@@ -101,14 +101,15 @@ class NewPayday extends Component{
             )
         })      
         return(
-            <div className='main'>
+            <div className='payday_container'>
                 <Nav />
-                <div>
-                    <div className="fixed">
-                        <h1>NewPayday</h1>
+                <div className="payday_main">
+                    <div className="payday_fixed">
+                        <h1>New Payday</h1>
+                        <hr className='line'/>
                         <label>
-                            Actual Paycheck amount:
-                            <CurrencyInput 
+                            Paycheck Amount: &nbsp;
+                            <CurrencyInput className="payday_input"
                                 value={this.state.amount} 
                                 placeholder="$0.00"
                                 onChangeEvent={this.handleAmount}
@@ -116,11 +117,15 @@ class NewPayday extends Component{
                                 />
                         </label>
                         <br/>
-                        Unbudgeted:${(this.state.amount - subtractor).toFixed(2)}
+                        Unbudgeted: ${(this.state.amount - subtractor).toFixed(2)}
+                        <hr className='line'/>
                     </div>
-                    {enevlopeRows}
-                    <br/>
-                    <button onClick={() => this.submitToTrans()}>Send To Transactions</button>
+                    <div className='payday_cards'>
+                        {enevlopeRows}
+                        <br/>
+                        <button className="depo_button"
+                        onClick={() => this.submitToTrans()}>Send To Transactions</button>
+                    </div>
                 </div>
             </div>
         )

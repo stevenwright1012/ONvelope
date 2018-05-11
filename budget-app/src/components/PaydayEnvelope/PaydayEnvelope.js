@@ -29,24 +29,41 @@ class PaydayEnvelope extends React.Component{
     }
     render(){
         let {name, type, amount} = this.props
+        let sign=''
+        if(amount < 0){
+            sign ='-'
+        }
         return (
-            <div className="envelope">
-                <h3>{name}</h3>
-                <div>
-                    Type:{type},
+            <div className="envelope_row">
+                    <span className="envelope_name">
+                            {name}
+                    </span>
                     <br/>
-                    current amount:${(+amount).toFixed(2)}
+                    <p>
+                        <u>
+                        Type
+                        </u>
+                        : {type}, 
+                    </p>
+                    <p>
+                        <u>
+                        Amount
+                        </u>
+                        : {sign}${Math.abs(+amount).toFixed(2)}
+                    </p>
+                    <CurrencyInput className="envelope_row_input"
+                                value={this.state.budgetedAmount} 
+                                placeholder="$0.00"
+                                onChangeEvent={this.handleAmount}
+                                prefix="$"
+                                />
                     <br/>
-                    <CurrencyInput 
-                    value={this.state.budgetedAmount} 
-                    placeholder="$0.00"
-                    onChangeEvent={this.handleAmount}
-                    prefix="$"
-                    />
-                    <br/>
-                    New amount:${(+amount + +this.state.budgetedAmount).toFixed(2)}
-
-                </div>
+                    <p>
+                        <u>
+                        After Deposit
+                        </u>
+                        : {sign}${Math.abs(+amount + this.state.budgetedAmount).toFixed(2)}
+                    </p>
             </div>
         )
     }

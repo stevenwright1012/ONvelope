@@ -24,16 +24,22 @@ class EnvelopeCard extends React.Component{
         }
         return(
             <div className="envelope_card">
-                Envelope: {name}
-                <br/>
-                Type: {type},  
-                Amount: {sign}${(Math.abs(+amount)).toFixed(2)}
+                <h4>
+                    {name}
+                </h4>
+                <p>
+                    Type: {type}  
+                </p>
+                <p>
+                    Amount: {sign}${(Math.abs(+amount)).toFixed(2)}
+                </p>
                 {
                 +amount
                 ?
                 null
                 :
-                <button onClick={() => this.deleteEnvelope()}>Delete Envelope</button>
+                <button className="envelope_delete_button"
+                onClick={() => this.deleteEnvelope()}>Delete Envelope</button>
                 }
             </div>
         )
