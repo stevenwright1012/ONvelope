@@ -19,6 +19,7 @@ class PaydayPlan extends Component{
         this.handlePay = this.handlePay.bind(this);
     }
     componentDidMount(){
+        window.scrollTo(0, 0);
         let plans = this.props.envelopes.map(env => {
             return {
                 id: env.id,

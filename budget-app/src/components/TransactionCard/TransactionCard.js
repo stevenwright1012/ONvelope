@@ -24,6 +24,7 @@ class TransactionCard extends React.Component{
     }
     componentDidMount(){
         const {payee, amount, envelope, status, note} = this.props;
+        this.refs.btn.removeAttribute("disabled");
         this.setState({
             payee: payee,
             amountOG: amount,
@@ -34,6 +35,9 @@ class TransactionCard extends React.Component{
             statusNew: status,
             note: note
         })
+    }
+    componentDidUpdate(){
+        this.refs.btn.removeAttribute("disabled");
     }
     handleEdit(){
         this.setState({
@@ -112,8 +116,10 @@ class TransactionCard extends React.Component{
             pending = "Pending"
         }
         var source = ''
+        var sign = null
         if(amount<0){
             source = 'Payee'
+            sign = '-'
         }
         else{ source = 'Source'}
 
@@ -123,6 +129,7 @@ class TransactionCard extends React.Component{
                 return <option key={i} value={+enve.id}>{enve.name}</option>
             })
         }
+
 
         return (
             <div className="tran_card">
@@ -137,7 +144,7 @@ class TransactionCard extends React.Component{
                             <u>
                                 Amount: 
                             </u>
-                            &nbsp;${(+amount).toFixed(2)}</p>
+                            &nbsp; {sign}${Math.abs(+amount).toFixed(2)}</p>
                         <p>
                             <u>
                                 Envelope:

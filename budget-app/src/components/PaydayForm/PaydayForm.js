@@ -8,22 +8,35 @@ class PaydayForm extends React.Component{
         super()
 
         this.state ={
-            plannedAmount: 0
+            plannedAmount: 0,
+            displayAmount: 0,
+            timeout: null
         }
         this.handleAmount = this.handleAmount.bind(this)
     }
     componentDidMount(){
         this.setState({
-            plannedAmount: +this.props.user.payday[this.props.id]
+            plannedAmount: +this.props.user.payday[this.props.id],
+            displayAmount:  +this.props.user.payday[this.props.id]
         })
     }
     handleAmount(e, mask, float){
-        this.props.changeFn({
-            id: this.props.id,
-            plannedAmount: float
-        })
+        let {id} = this.props
+        var envObj ={
+            id: id,
+            plannedAmount: float,
+        }
         this.setState({
-            plannedAmount: float
+            displayAmount: float
+        })
+        clearTimeout(this.state.timeout)
+        this.setState({
+            timeout: setTimeout(() => {
+                this.props.changeFn(envObj) 
+                this.setState({
+                    plannedAmount: float
+                })
+            }, 1200)
         })
     }
     render(){
@@ -41,7 +54,7 @@ class PaydayForm extends React.Component{
                     : {type}, 
                 </p>
                 Amount: <CurrencyInput className="payday_input"
-                        value={this.state.plannedAmount} 
+                        value={this.state.displayAmount} 
                         onChangeEvent={this.handleAmount}
                         prefix="$"
                         />

@@ -6,25 +6,36 @@ class PaydayEnvelope extends React.Component{
         super()
 
         this.state ={
-            budgetedAmount: 0
+            budgetedAmount: 0,
+            displayAmount: 0,
+            timeout: null
         }
         this.handleAmount = this.handleAmount.bind(this)
     }
     componentDidMount(){
         let plannedAmount = +this.props.budgetedAmount
         this.setState({
-            budgetedAmount: plannedAmount
+            budgetedAmount: plannedAmount,
+            displayAmount: plannedAmount
         })
     }
     handleAmount(e, mask, float){
         let {id, name, type} = this.props
-        var obj = {id: id,
-                   amount: float,
-                   name: name,
-                   type: type}
-        this.props.totalFn(obj)
+        var obj = {
+            id: id,
+            amount: float,
+            name: name,
+            type: type
+        }
+        clearTimeout(this.state.timeout)
         this.setState({
-            budgetedAmount: float
+            displayAmount: float,
+            timeout: setTimeout(() => {
+                this.props.totalFn(obj) 
+                this.setState({
+                    budgetedAmount: float
+                })
+            }, 1200)
         })
     }
     render(){
@@ -52,8 +63,7 @@ class PaydayEnvelope extends React.Component{
                         : {sign}${Math.abs(+amount).toFixed(2)}
                     </p>
                     <CurrencyInput className="envelope_row_input"
-                                value={this.state.budgetedAmount} 
-                                placeholder="$0.00"
+                                value={this.state.displayAmount} 
                                 onChangeEvent={this.handleAmount}
                                 prefix="$"
                                 />

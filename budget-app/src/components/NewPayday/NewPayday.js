@@ -15,10 +15,11 @@ class NewPayday extends Component{
             amount:0,
             depoEnvelopes: []
         }
-    this.calulateTotal = this.calculateTotal.bind(this);
+    this.calculateTotal = this.calculateTotal.bind(this);
     this.handleAmount = this.handleAmount.bind(this);
     }
     componentDidMount(){
+        window.scrollTo(0, 0);
         this.props.redirectFalse();
         this.props.getUser()
         var arr = this.props.envelopes.map(env => {
@@ -37,11 +38,15 @@ class NewPayday extends Component{
         })
     }
     handleAmount(e, mask, float){
+        console.log(this.state);
+        
         this.setState({
             amount: float
         })
     }
     calculateTotal(obj){
+        console.log(this.state);
+        
         var filtArr = this.state.depoEnvelopes.filter( env => env.id !== obj.id);
         
         var newArr = [...filtArr, obj];
@@ -95,7 +100,7 @@ class NewPayday extends Component{
                     type={type}
                     amount={+amount}
                     budgetedAmount={+this.props.payday[id]}
-                    totalFn={this.calulateTotal}
+                    totalFn={this.calculateTotal}
                     />
                 </div>
             )
