@@ -12,10 +12,8 @@ class AllTransactions extends Component{
         super()
 
         this.state ={
-            filteredList:[],
-            refresh: false
+            filter: ''
         }
-        this.handleRefresh = this.handleRefresh.bind(this)
     }
     componentDidMount(){
         window.scrollTo(0, 0);
@@ -29,16 +27,16 @@ class AllTransactions extends Component{
     componentDidUpdate(){
             this.props.getTransactions(this.props.user.user_id);
     }
-    componentWillReceiveProps(next){
-        if(this.state.filteredList.length !== next.transactions.length){
-            this.setState({
-                filteredList: next.transactions
-            })
-        }
-    }
-    handleRefresh(){
+    // componentWillReceiveProps(next){
+    //     if(this.state.filteredList.length !== next.transactions.length){
+    //         this.setState({
+    //             filteredList: next.transactions
+    //         })
+    //     }
+    // }
+    setFilter(str){
         this.setState({
-            refresh:true
+            filter: str || ''
         })
     }
     updateFilteredList(str){
@@ -46,90 +44,77 @@ class AllTransactions extends Component{
         switch (str) {
             case "DEPOSITS":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount > 0){
+                    if(+tran.trans_amount > 0){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "PAID":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount < 0){
+                    if(+tran.trans_amount < 0){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "PENDING_DEPOSITS":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount > 0 && tran.status === false){
+                    if(+tran.trans_amount > 0 && tran.status === false){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "PENDING_PAYMENTS":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount < 0 && tran.status === false){
+                    if(+tran.trans_amount < 0 && tran.status === false){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "CLEARED_DEPOSITS":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount > 0 && tran.status === true){
+                    if(+tran.trans_amount > 0 && tran.status === true){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "CLEARED_PAID":
                 newList = this.props.transactions.filter(tran =>{
-                    if(tran.amount < 0 && tran.status === true){
+                    if(+tran.trans_amount < 0 && tran.status === true){
                         return tran
                     }else{
                         return null
                     }
                 })
-                this.setState({
-                    filteredList: newList
-                })
+                return newList;
                 break;
             case "ALL":
-                this.setState({
-                    filteredList: this.props.transactions
-                })
+            newList = this.props.transactions.slice()
+            return newList;
                 break;
             default:
-                this.setState({
-                    filteredList: this.props.transactions
-                })
+            return this.props.transactions
                 break;
         }
     }
     render(){
-        var cards = this.state.filteredList.map((tran, i) => {
+        let filteredList = this.updateFilteredList(this.state.filter)
+
+        var cards = filteredList.map((tran, i) => {
             if(tran.trans_amount > 0){
                 return (
                     <TransactionCard key={i}
@@ -159,6 +144,7 @@ class AllTransactions extends Component{
                 )
             }
         })
+        
         return(
             <div className='all_trans_container'>
                 <Nav />
@@ -171,16 +157,16 @@ class AllTransactions extends Component{
                         </h1>
                         <hr className='depo_line'/>
                         <Balance />
-                        {/* <button className="trans_button" id='all'
-                        onClick={() => this.updateFilteredList('ALL')}>All</button>    
+                        <button className="trans_button" id='all'
+                        onClick={() => this.setFilter('ALL')}>All</button>    
                         <br/>                
-                        <button className="trans_button depo" onClick={() => this.updateFilteredList('DEPOSITS')}>Deposits</button>                    
-                        <button className="trans_button depo" onClick={() => this.updateFilteredList('CLEARED_DEPOSITS')}>Cleared</button>                    
-                        <button className="trans_button depo" onClick={() => this.updateFilteredList('PENDING_DEPOSITS')}>Pending</button>    
+                        <button className="trans_button depo" onClick={() => this.setFilter('DEPOSITS')}>Deposits</button>                    
+                        <button className="trans_button depo" onClick={() => this.setFilter('CLEARED_DEPOSITS')}>Cleared</button>                    
+                        <button className="trans_button depo" onClick={() => this.setFilter('PENDING_DEPOSITS')}>Pending</button>    
                         <br/>                
-                        <button className="trans_button trans" onClick={() => this.updateFilteredList('PAID')}>Paid</button>                    
-                        <button className="trans_button trans" onClick={() => this.updateFilteredList('CLEARED_PAID')}>Cleared</button>                    
-                        <button className="trans_button trans" onClick={() => this.updateFilteredList('PENDING_PAYMENTS')}>Pending</button>             */}
+                        <button className="trans_button trans" onClick={() => this.setFilter('PAID')}>Paid</button>                    
+                        <button className="trans_button trans" onClick={() => this.setFilter('CLEARED_PAID')}>Cleared</button>                    
+                        <button className="trans_button trans" onClick={() => this.setFilter('PENDING_PAYMENTS')}>Pending</button>            
                     </div>
                     <div className="cards">
                         {cards}

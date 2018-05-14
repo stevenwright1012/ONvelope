@@ -10,6 +10,7 @@ import PaydayPlan from './components/PaydayPlan/PaydayPlan';
 import AddEnvelope from './components/AddEnvelope/AddEnvelope';
 import Move from './components/Move/Move'
 import Setup from './components/Setup/Setup'
+import Charts from './components/Charts/Charts'
 
 
 export default(
@@ -24,6 +25,6 @@ export default(
         <Route path='/addenvelope' component={AddEnvelope}/>
         <Route path='/move' component={Move}/>
         <Route path='/setup' component={Setup}/>
-
+        <Route path='/charts' component={Charts} />
     </Switch>
 )

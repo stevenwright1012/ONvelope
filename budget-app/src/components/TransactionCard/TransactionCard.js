@@ -1,7 +1,7 @@
 import React from 'react';
 import './TransactionCard.css';
 import {connect} from 'react-redux';
-import {deleteTrans, editTrans} from '../../ducks/reducer';
+import {deleteTrans, editTrans, getTransactions} from '../../ducks/reducer';
 import axios from 'axios';
 import CurrencyInput from 'react-currency-input';
 
@@ -25,6 +25,7 @@ class TransactionCard extends React.Component{
     componentDidMount(){
         const {payee, amount, envelope, status, note} = this.props;
         this.refs.btn.removeAttribute("disabled");
+        this.props.getTransactions(this.props.user.user_id)        
         this.setState({
             payee: payee,
             amountOG: amount,
@@ -98,7 +99,8 @@ class TransactionCard extends React.Component{
             note: note
         }).then(res => {
             this.props.editTrans(res.data)
-            window.location.reload();
+            this.props.getTransactions(this.props.user.user_id);     
+            // window.location.reload();
             this.setState({
                 edit: false,
             })
@@ -228,4 +230,4 @@ function mapStateToProps(state){
     }
 }
 
-export default  connect(mapStateToProps, {deleteTrans, editTrans})(TransactionCard);
+export default  connect(mapStateToProps, {deleteTrans, editTrans, getTransactions})(TransactionCard);
