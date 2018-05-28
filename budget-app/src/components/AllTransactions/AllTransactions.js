@@ -103,7 +103,7 @@ class AllTransactions extends Component{
                 return newList;
                 break;
             case "ALL":
-            newList = this.props.transactions.slice()
+            newList = this.props.transactions
             return newList;
                 break;
             default:

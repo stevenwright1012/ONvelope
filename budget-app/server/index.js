@@ -76,7 +76,7 @@ app.get('/auth/me', (req, res) => {
 //////transactions endpoints/////
 app.get('/api/trans/:id', con.allTrans)
 app.post('/api/addtrans', con.addTrans)
-app.put('/api/delete', con.deleteTrans)
+app.put('/api/delete', con.deleteTrans) //I used a put endpoint because i needed to send a body with req. .delete did not allow for this
 app.put('/api/edit', con.editTrans)
 
 /////envelope endpoints/////

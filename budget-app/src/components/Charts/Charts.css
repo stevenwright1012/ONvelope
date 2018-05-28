@@ -1,0 +1,20 @@
+.chart_container{
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.chart_main{
+    position: absolute;
+    left: 20vw;
+    height: 100vh ;
+    background: rgb(51, 50, 50);
+    /* color: #58d1c1; */
+    width: 80vw;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+}
+.chart_main u{
+    font-family: 'Permanent Marker', cursive;
+    color: #ffe261;
+    font-size: 30px;
+}

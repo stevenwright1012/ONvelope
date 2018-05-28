@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "a090768d-e72b-4e07-8877-04611b3fcf57",
+		"name": "ONvelope_endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3005/api/trans/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1c197d9-6599-4034-b42f-edcb9baa9be5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Every object has a user_id of 1\", () => {",
+							"    let res = pm.response.json()",
+							"    let result = true",
+							"    for(let i = 0; i < res.length; i++){",
+							"        if(res[i].user_id !== 1){",
+							"            result = false",
+							"        }",
+							"    }",
+							"    pm.expect(result).to.eql(true);",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3005/api/trans/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"trans",
+						"1"
+					]
+				},
+				"description": "Get all transactions for a specific user 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3005/api/addtrans",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc556b53-dece-4588-9256-d9955746b88f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"first object in response is from body of request\", () => {",
+							"    let res = pm.response.json()",
+							"    let result = res[0][0]",
+							"    ",
+							"    pm.expect(result.payee).to.eql(\"Macey's\")",
+							"    pm.expect(result.trans_amount).to.eql(\"-34\")",
+							"    pm.expect(result.note).to.eql(\"you're butt\")",
+							"})",
+							"",
+							"pm.test(\"user returned is user 1\", () => {",
+							"    let res = pm.response.json()",
+							"    let result = res[1][0]",
+							"    ",
+							"    pm.expect(result.user_id).to.eql(1)",
+							"})"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"payee\": \"Macey's\",\r\n        \"amount\": \"-34\",\r\n        \"envelope\": \"60\",\r\n        \"status\": \"true\",\r\n        \"note\": \"you're butt\"\r\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:3005/api/addtrans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"addtrans"
+					]
+				},
+				"description": "test for first object in array to contain infor from req.body"
+			},
+			"response": []
+		}
+	]
+}

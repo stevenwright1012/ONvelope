@@ -1,38 +1,39 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Nav from '../Nav/Nav';
-// import {Line} from 'react-chartjs-2'
+import './Charts.css'
+import {Bar} from 'react-chartjs-2'
 
 class Charts extends Component{
-    // constructor(){
-    //     super()
+    constructor(){
+        super()
 
-    //     this.state ={
-    //         chartData: {
-    //             labels: this.props.envelopes.map(enve => {
-    //                 return enve.name;
-    //             }),
-    //             datasets:[]
-    //         },
-    //         chartOptions: {
-    //             title: {
-    //                 display: true,
-    //                 text: "Envelopes",
-    //                 fontSize: 20
-    //             },
-    //             animation:{
-    //                 duration: 1500,
-    //             }
-    //         }
-    //     }
-    // }
+        this.state ={
+            chartData: {
+                labels: ['a', 'b', 'c'],
+                datasets:[{
+                    label: 'Balance',
+                    data:[1,2,3]
+                }],
+                backgroundColor: ['rgba(0, 255, 0, 0.6)']
+            },
+        }
+    }
     render(){
         return(
-            <div>
+            <div className='chart_container' >
                 <Nav />
-                <div>
-                    <h1>Charts</h1>
-                    {/* <Line data={this.state.chartData} options={this.state.chartOptions}/> */}
+                <div className='chart_main' >
+                <h1>
+                    <u>
+                        Charts
+                    </u>
+                </h1>
+                <hr className='depo_line'/>
+                    <Bar
+                        data={this.state.chartData}
+                        options={{}}
+                    />
                 </div>
             </div>
         )

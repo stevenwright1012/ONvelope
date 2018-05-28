@@ -19,6 +19,11 @@ class AddTransaction extends Component{
         }
         this.handleAmount = this.handleAmount.bind(this)
     }
+    componentDidUpdate(){
+        if(this.props.redirect){
+            setTimeout(()=>{ this.props.history.push('/transactions') }, 1000)
+        }
+    }
     handlePayee(e){
         this.setState({
             payee: e
@@ -57,7 +62,7 @@ class AddTransaction extends Component{
         this.refs.btn.setAttribute("disabled", "disabled");  
         
         this.props.addTrans(payee, amount, envelope, status, note)
-        this.props.history.push('/transactions')
+        // this.props.history.push('/transactions')
     }
     render(){
         var userEnvelopes = null;
@@ -129,7 +134,8 @@ class AddTransaction extends Component{
 function mapStateToProps(state){
     return{
         user: state.user,
-        envelopes: state.envelopes
+        envelopes: state.envelopes,
+        redirect: state.redirect
     }
 }
 

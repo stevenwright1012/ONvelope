@@ -9,17 +9,17 @@ module.exports = {
     addTrans:(req, res) => {
         const db = req.app.get('db');
         const { payee, amount, envelope, status, note} = req.body;
-        const{user_id} = req.user        
+        // const{user_id} = req.user        
         let tempArr = []
 
-        tempArr.push(db.add_trans([user_id, payee, amount, envelope, status, note]));
+        tempArr.push(db.add_trans([1, payee, amount, envelope, status, note]));
             if(!status){
-                tempArr.push(db.alter_total([0, user_id]));
+                tempArr.push(db.alter_total([0, 1]));
             }
             else{
-                tempArr.push(db.alter_total([amount, user_id]));                
+                tempArr.push(db.alter_total([amount, 1]));                
             }
-        tempArr.push(db.alter_envelope([amount, envelope, user_id]));
+        tempArr.push(db.alter_envelope([amount, envelope, 1]));
 
         Promise.all(tempArr).then(values => {
             res.status(200).send(values);
