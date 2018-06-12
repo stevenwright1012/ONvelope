@@ -18,8 +18,9 @@
     color: #ffe261;
 }
 .add_trans_input{
+    display: block;
     background: #58d1c1;
-    margin: 20px 0 20px 0;
+    margin: 20px auto;
     height: 40px;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 20px; 

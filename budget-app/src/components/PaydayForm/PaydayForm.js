@@ -53,11 +53,13 @@ class PaydayForm extends React.Component{
                     </u>
                     : {type}, 
                 </p>
-                Amount: <CurrencyInput className="payday_input"
-                        value={this.state.displayAmount} 
-                        onChangeEvent={this.handleAmount}
-                        prefix="$"
-                        />
+                <p>
+                    Amount: <CurrencyInput className="payday_input"
+                            value={this.state.displayAmount} 
+                            onChangeEvent={this.handleAmount}
+                            prefix="$"
+                            />
+                </p>
             </div>
         )
     }

@@ -32,5 +32,6 @@
     .envelope_row_input{
         display: block;
         margin: 5px auto;
+        height: 30px;;
     }
 }

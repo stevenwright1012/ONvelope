@@ -28,3 +28,24 @@
     border: 0;
     border-radius: 5px;
 }
+@media (min-width: 500px){
+    .move_main{
+        position: absolute;
+        left: 90px;
+        width: calc(100vw - 90px);  
+    }
+    .move_main h1{
+        font-size: 48px;
+    }    
+    .move_main label{
+        font-size: 25px;
+    }
+    .move_main h3{
+        font-size: 30px;
+    }
+    .move_dropdown{
+        height: 50px;
+        width: 200px;
+        font-size: 28px;
+    }    
+}

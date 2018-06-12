@@ -143,28 +143,39 @@ class TransactionCard extends React.Component{
                             {payee}
                         </h4>
                         <p>
-                            <u>
-                                Amount: 
-                            </u>
-                            &nbsp; {sign}${Math.abs(+amount).toFixed(2)}</p>
-                        <p>
-                            <u>
-                                Envelope:
-                            </u>
-                            &nbsp;{name}
-                        </p>
-                        <p>
-                            <u>
-                                Status: 
-                            </u>
-                            &nbsp;{pending}
-                        </p>
-                        <p>
-                            <u>
-                                Note: 
-                            </u>
-                            &nbsp;{note}
-                        </p>
+                                <u>
+                                    Amount: 
+                                </u>
+                                &nbsp; {sign}${Math.abs(+amount).toFixed(2)}
+                            </p>
+                        <div className="info" >
+                            
+                            <div className="info-content" >
+                            <p>
+
+                                <u>
+                                    Envelope:
+                                </u>
+                                &nbsp;{name}
+                            </p>
+                            </div>
+                            <div className="info-content" >
+                                <p>
+                                    <u>
+                                        Status: 
+                                    </u>
+                                    &nbsp;{pending}
+                                </p>
+                            </div>
+                            <div className="info-content">
+                                <p>
+                                    <u>
+                                        Note: 
+                                    </u>
+                                    &nbsp;{note}
+                                </p>
+                            </div>
+                        </div>
                         <div className='trans_card_butts'>
                             <button  ref="btn" className="trans_card_button"
                             onClick={() => this.delete(id, amount, envelope, status)}>Delete</button>
@@ -173,7 +184,7 @@ class TransactionCard extends React.Component{
                         </div>
                     </div>
                 :
-                <div id={this.props.styles}>
+                <div id={this.props.styles} className="tran_content" >
                     <p>
                         {source}: <input className="trans_card_input"
                         type="text" value={this.state.payee} onChange={(e) => this.handlePayee(e.target.value)}/>
