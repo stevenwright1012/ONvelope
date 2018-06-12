@@ -23,17 +23,12 @@
 }
 .logo_container{
     position: relative;
-    width: 20vh;
-    padding-top: 20vh;
-    margin-left: auto;
-    margin-right: auto;
+    /* height: 10vh; */
+    width: 120px;
+    margin: 0 auto;
 }
 .login_logo{
-    position:  absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    width: 100%;
 }
 #atribute{
     position: absolute;
@@ -60,4 +55,14 @@
     #atribute{
         font-size: 15px;
     }
+    .logo_container{
+        width: 140px;
+    }
 }
+@media (min-width: 900px){
+    .logo_container{
+        width: 200px;
+
+    }
+}
+
