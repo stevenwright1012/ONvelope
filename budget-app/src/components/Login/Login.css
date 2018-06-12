@@ -51,4 +51,13 @@
     .login h1{
         font-size: 80px;
     }
+    .login h2{
+        font-size: 40px;
+    }
+    .login h3{
+        font-size: 25px;
+    }
+    #atribute{
+        font-size: 15px;
+    }
 }

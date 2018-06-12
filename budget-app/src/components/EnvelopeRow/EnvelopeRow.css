@@ -21,3 +21,16 @@
     font-size: 16px; 
     width: 150px;   
 }
+@media (min-width: 500px){
+    .envelope_row p{
+        /* text-decoration: underline; */
+        font-size: 22px;
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .envelope_row_input{
+        display: block;
+        margin: 5px auto;
+    }
+}

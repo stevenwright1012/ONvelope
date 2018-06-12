@@ -11,9 +11,21 @@
     color: #ffe261;
 }
 .envelope_delete_button{
+    display: block;
     border: 0;
     border-radius: 5px;
     background: #58d1c1;
-    margin-bottom: 3px;
+    margin: 3px auto;
     font-family: 'Do Hyeon', sans-serif;
+}
+@media (min-width: 500px){
+    .envelope_card p{
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    .envelope_card h4{
+        font-size: 28px;
+    }    
 }

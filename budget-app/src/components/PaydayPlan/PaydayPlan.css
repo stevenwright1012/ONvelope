@@ -5,10 +5,10 @@
 }
 .plan_main{
     position: absolute;
-    left: 20vw;
+    left: 64px;
     background: rgb(51, 50, 50);
     color: #58d1c1;
-    width: 80vw;
+    width: calc(100vw - 64px);
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
     height: 100%;
@@ -20,7 +20,7 @@
 }
 .plan_fixed{
     position: fixed;
-    width: 80vw;    
+    width: calc(100vw - 64px);   
     background: rgb(51, 50, 50);
     z-index: 2;
 }

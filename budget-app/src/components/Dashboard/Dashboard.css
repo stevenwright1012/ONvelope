@@ -5,10 +5,10 @@
 }
 .dash_main{
     position: absolute;
-    left: 20vw;
+    left: 64px;
     background: rgb(51, 50, 50);
     color: #58d1c1;
-    width: 80vw;
+    width: calc(100vw - 64px);  
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
     height: 100%;
@@ -18,20 +18,20 @@
 }
 .dash_fixed{
     position: fixed;
-    width: 80vw;    
+    width: calc(100vw - 64px);     
     background: rgb(51, 50, 50);
     z-index: 2;
 }
 .line{
     border: solid #1ab0ae 2px;
-    width: 100%;
+    width: calc(100vw - 64px); 
     box-sizing: border-box;
 }
 .lists{
     position: absolute;
     top: 110.6px;
     background: rgb(51, 50, 50);
-    width: 100%
+    width: 100%;
         
 }
 .lists u{
@@ -55,4 +55,29 @@
     margin: 5px;
     color: rgb(51, 50, 50); 
     font-family: 'Do Hyeon', sans-serif;    
+}
+@media (min-width: 500px){
+    .dash_main{
+        position: absolute;
+        left: 90px;
+        width: calc(100vw - 90px);  
+    }
+    .dash_fixed{
+        width: calc(100vw - 90px);     
+    }
+    .line{
+        width: calc(100vw - 90px); 
+    }
+    .lists p{
+        font-size: 20px;
+    }
+    .envelope_totals p{
+        font-size: 25px; 
+    }
+    .lists{
+        top: 170.2px;
+    }
+    .dash_main h2{
+        font-size: 35px;
+    }
 }

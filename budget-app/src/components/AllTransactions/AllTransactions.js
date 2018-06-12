@@ -51,7 +51,6 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "PAID":
                 newList = this.props.transactions.filter(tran =>{
                     if(+tran.trans_amount < 0){
@@ -61,7 +60,6 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "PENDING_DEPOSITS":
                 newList = this.props.transactions.filter(tran =>{
                     if(+tran.trans_amount > 0 && tran.status === false){
@@ -71,7 +69,6 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "PENDING_PAYMENTS":
                 newList = this.props.transactions.filter(tran =>{
                     if(+tran.trans_amount < 0 && tran.status === false){
@@ -81,7 +78,6 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "CLEARED_DEPOSITS":
                 newList = this.props.transactions.filter(tran =>{
                     if(+tran.trans_amount > 0 && tran.status === true){
@@ -91,7 +87,6 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "CLEARED_PAID":
                 newList = this.props.transactions.filter(tran =>{
                     if(+tran.trans_amount < 0 && tran.status === true){
@@ -101,14 +96,11 @@ class AllTransactions extends Component{
                     }
                 })
                 return newList;
-                break;
             case "ALL":
             newList = this.props.transactions
             return newList;
-                break;
             default:
             return this.props.transactions
-                break;
         }
     }
     render(){

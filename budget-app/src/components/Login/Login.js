@@ -13,7 +13,7 @@ export default  function Login(){
                 </a>
             </div>
             <h2>The best way to get <u>ON</u> top of your finances</h2>
-            <h3>To get started, click on the&nbsp;
+            <h3>To get started, click or tap on the&nbsp;
                 <u>
                     <a href={REACT_APP_LOGIN}>
                         ONvelope! 
@@ -22,7 +22,7 @@ export default  function Login(){
                 &nbsp;logo   
              </h3>
             <div id="atribute">
-                Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" rel="noopener noreferrer">CC 3.0 BY</a>
             </div>
         </div>
     )

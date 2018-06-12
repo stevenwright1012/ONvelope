@@ -9,53 +9,77 @@ export default  function Nav(){
         <div className="nav_bar">
             <Link to='/dashboard'>
                 <div className='nav_button' id='logo'>
-                    <img src="./icons/ONvelope.png" alt="" className="icon"/>
+                    <img src="./icons/ONvelope.png" alt="" className="logoImg"/>
                 </div>
             </Link>
             <Link to='/deposit'>
-                <button className='nav_button' id='deposit'>
+            <div className='nav_button'>
+            
+                <button id='deposit'>
                 <img src="./icons/deposit.png" alt="" className="icon"/>
-                Deposit</button>
+                </button>
+                <p>Deposit</p>
+            </div>
             </Link>
-            <hr className='butt_lines'/>
+            
             <Link to='/trans'>
-                <button className='nav_button'>
+            <div className='nav_button'>
+            
+                <button >
                 <img src="./icons/addtrans.png" alt="" className="icon"/>
-                <span>Trans-</span>
-                <span>action</span>
+
                 </button>
+                <p>Trans</p>
+            </div>            
             </Link>
-            <hr className='butt_lines'/>            
+                        
             <Link to='/transactions'>
-                <button className='nav_button'>
+            <div className='nav_button'>
+            
+                <button >
                 <img src="./icons/alltrans.png" alt="" className="icon"/>
-                All</button>
-            </Link>
-            <hr className='butt_lines'/>            
-            <Link to='/payday'>
-                <button className='nav_button'>
-                <img src="./icons/payday.png" alt="" className="icon"/>
-                Payday</button>
-            </Link>
-            <hr className='butt_lines'/>            
-            <Link to='/plan'>
-                <button className='nav_button'>
-                    <img src="./icons/plan.png" alt="" className="icon"/>
-                    Plan
                 </button>
+                <p>All-Trans</p>
+            </div>
+        
             </Link>
-            <hr className='butt_lines'/>            
+                        
+            <Link to='/payday'>
+            <div className='nav_button'>
+            
+                <button >
+                <img src="./icons/payday.png" alt="" className="icon"/>
+                </button>
+                <p>Payday</p>
+            </div>                
+            </Link>
+                        
+            <Link to='/plan'>
+            <div className='nav_button'>
+                <button >
+                    <img src="./icons/plan.png" alt="" className="icon"/>
+                </button>
+                <p>Plan</p>
+            </div>
+            </Link>
+                        
             <Link to='/move'>
-                <button className='nav_button'>
+            <div className='nav_button'>
+            
+                <button >
                 <img src="./icons/exchange.png" alt="" className="icon"/>
-                Move</button>
-            </Link>
-            <hr className='butt_lines'/>            
-            <a href={REACT_APP_LOGOUT}>
-                <button className='nav_button' id='logout'>
-                <img src="./icons/logout.png" alt="" className="icon"/>
-                Logout</button>
-            </a> 
+                </button>
+                <p>Move</p>
+            </div>                
+            </Link>        
+            <div className='nav_button' id='logout'>
+                <a href={REACT_APP_LOGOUT}>
+                    <button className="logoutBtn" >
+                    <img src="./icons/logout.png" alt="" className="icon"/>
+                    </button>
+                    <p>Logout</p>
+                </a> 
+            </div>
         </div>
     )
 }

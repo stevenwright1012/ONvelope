@@ -53,7 +53,7 @@ class EnvelopeRow extends React.Component{
                         <u>
                         Type
                         </u>
-                        : {type}, 
+                        : {type} 
                     </p>
                     <p>
                         <u>
