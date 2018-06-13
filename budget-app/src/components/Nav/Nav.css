@@ -41,6 +41,7 @@ button{
 }
 .icon{
     display: inline-block;
+    width: 50%;
 }
 p{
     margin: 0;
